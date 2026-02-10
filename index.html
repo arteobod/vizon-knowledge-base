@@ -14,6 +14,8 @@
             --vizon-orange: #f97316;
             --vizon-dark: #0a0a0a;
             --vizon-gray: #171717;
+            --stress-red: #ef4444;
+            --success-green: #22c55e;
         }
         
         body {
@@ -27,1315 +29,1026 @@
         }
         
         .glass {
-            background: rgba(23, 23, 23, 0.8);
+            background: rgba(23, 23, 23, 0.95);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.05);
         }
         
-        .search-glow:focus {
-            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+        /* Мгновенный поиск - главный элемент */
+        .instant-search {
+            background: #0f0f0f;
+            border: 2px solid #333;
+            transition: all 0.15s ease;
+            font-size: 18px;
+        }
+        
+        .instant-search:focus {
             border-color: #f97316;
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+            background: #000;
         }
         
-        .category-badge {
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        
-        .category-badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-        }
-        
-        .category-badge.active {
-            background: var(--vizon-orange);
-            color: white;
-        }
-        
-        .result-card {
-            transition: all 0.3s;
-            border-left: 3px solid transparent;
-        }
-        
-        .result-card:hover {
-            border-left-color: #f97316;
-            background: rgba(249, 115, 22, 0.05);
-            transform: translateX(4px);
-        }
-        
-        .highlight {
-            background: rgba(249, 115, 22, 0.3);
-            color: #fff;
-            padding: 0 4px;
+        /* Горячие клавиши */
+        .hotkey {
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
             border-radius: 4px;
-            font-weight: 600;
+            font-size: 12px;
+            font-family: monospace;
+            color: #888;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
-        .copy-toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #22c55e;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s;
-            z-index: 100;
-        }
-        
-        .copy-toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .tab-btn {
-            transition: all 0.3s;
-            border-bottom: 2px solid transparent;
-        }
-        
-        .tab-btn.active {
-            border-bottom-color: #f97316;
-            color: #f97316;
-            background: rgba(249, 115, 22, 0.1);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .doc-section {
-            border-left: 3px solid #f97316;
-            padding-left: 20px;
-            margin: 24px 0;
-        }
-        
-        .doc-scenario {
+        /* Сценарные группы - логическая навигация */
+        .scenario-group {
             background: rgba(249, 115, 22, 0.05);
-            border: 1px solid rgba(249, 115, 22, 0.2);
+            border: 1px solid rgba(249, 115, 22, 0.15);
             border-radius: 12px;
-            padding: 20px;
-            margin: 16px 0;
+            padding: 16px;
+            margin-bottom: 12px;
         }
         
-        .quick-tag {
-            display: inline-flex;
+        .scenario-group-header {
+            display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: rgba(249, 115, 22, 0.1);
-            border: 1px solid rgba(249, 115, 22, 0.2);
-            border-radius: 20px;
-            font-size: 13px;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(249, 115, 22, 0.1);
+        }
+        
+        .scenario-group-title {
+            font-weight: 700;
             color: #fb923c;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin: 4px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .quick-tag:hover {
-            background: rgba(249, 115, 22, 0.2);
-            transform: scale(1.05);
-        }
-        
-        .lang-badge {
+        /* Быстрые триггеры - только критичные */
+        .trigger-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
             font-size: 14px;
             color: #d4d4d4;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.1s;
             margin: 4px;
+            font-weight: 500;
         }
         
-        .lang-badge:hover {
-            background: rgba(249, 115, 22, 0.2);
+        .trigger-btn:hover {
+            background: rgba(249, 115, 22, 0.15);
             border-color: rgba(249, 115, 22, 0.4);
-            color: #fb923c;
+            color: #fff;
+            transform: translateY(-1px);
         }
         
-        .lang-badge.active {
-            background: rgba(249, 115, 22, 0.3);
+        .trigger-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .trigger-btn.stress {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+        
+        .trigger-btn.stress:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+        }
+        
+        .trigger-btn.success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #86efac;
+        }
+        
+        /* Карточка скрипта - читаемость по диагонали */
+        .script-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+        }
+        
+        .script-card:hover {
             border-color: #f97316;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        .script-card.expanded {
+            border-color: #f97316;
+            box-shadow: 0 0 0 1px #f97316;
+        }
+        
+        .script-header {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(249,115,22,0.05) 0%, transparent 100%);
+        }
+        
+        .script-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .script-badges {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .script-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .script-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .script-card.expanded .script-content {
+            max-height: 2000px;
+        }
+        
+        .script-body {
+            padding: 0 20px 20px;
+        }
+        
+        /* Форматирование диалога - сканируемость */
+        .dialogue-block {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            border-left: 3px solid #f97316;
+        }
+        
+        .dialogue-line {
+            margin: 8px 0;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .dialogue-speaker {
+            font-weight: 700;
+            display: inline-block;
+            min-width: 100px;
+        }
+        
+        .dialogue-speaker.manager {
+            color: #22c55e;
+        }
+        
+        .dialogue-speaker.client {
+            color: #ef4444;
+        }
+        
+        .dialogue-text {
+            color: #d4d4d4;
+        }
+        
+        /* Ключевые фразы - выделение */
+        .key-phrase {
+            background: rgba(249, 115, 22, 0.2);
+            color: #fb923c;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        
+        .power-word {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        /* Быстрые действия */
+        .quick-actions {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .fab-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--vizon-orange);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+            transition: all 0.2s;
+        }
+        
+        .fab-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(249, 115, 22, 0.6);
+        }
+        
+        /* Избранное */
+        .fav-btn {
+            color: #666;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .fav-btn.active {
+            color: #fbbf24;
+        }
+        
+        /* Табы упрощенные */
+        .nav-tabs {
+            display: flex;
+            gap: 4px;
+            background: rgba(0,0,0,0.5);
+            padding: 4px;
+            border-radius: 12px;
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: none;
+            background: transparent;
+            white-space: nowrap;
+        }
+        
+        .nav-tab:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .nav-tab.active {
+            background: #f97316;
             color: #fff;
         }
         
-        /* Скроллбар */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f97316;
-        }
-        
+        /* Пустое состояние */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
             color: #525252;
         }
+        
+        /* Контрастность для глаз */
+        .high-contrast {
+            background: #000;
+            color: #fff;
+        }
+        
+        /* Скрыть/показать */
+        .hidden { display: none !important; }
+        
+        /* Анимация */
+        @keyframes pulse-urgent {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+        }
+        
+        .urgent {
+            animation: pulse-urgent 2s infinite;
+        }
+        
+        /* Скроллбар */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f97316; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Шапка -->
-    <header class="border-b border-white/5 bg-black/50 sticky top-0 z-50 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex justify-between items-center mb-4">
+    <!-- Шапка - минималистичная -->
+    <header class="border-b border-white/5 bg-black/80 sticky top-0 z-50 backdrop-blur-xl">
+        <div class="max-w-5xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 vizon-gradient rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-orange-500/20">
+                    <div class="w-9 h-9 vizon-gradient rounded-lg flex items-center justify-center text-white font-bold shadow-lg">
                         <i class="fas fa-bolt"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-white tracking-tight">Vizon</h1>
-                        <p class="text-xs text-gray-500 uppercase tracking-wider">Knowledge Base</p>
+                        <h1 class="text-lg font-bold text-white">Vizon</h1>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-wider">Скрипты для звонков</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="showStats()" class="text-gray-400 hover:text-orange-400 transition-colors text-sm">
-                        <i class="fas fa-chart-bar mr-1"></i> Статистика
-                    </button>
+                <div class="flex items-center gap-2">
+                    <span class="hotkey">ESC</span>
+                    <span class="text-xs text-gray-500">сброс</span>
                 </div>
             </div>
             
-            <!-- Табы навигации -->
-            <div class="flex gap-1 bg-black/30 p-1 rounded-xl overflow-x-auto">
-                <button class="tab-btn active px-6 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-white whitespace-nowrap" onclick="switchTab('search', this)">
-                    <i class="fas fa-search mr-2"></i>Поиск по базе
+            <!-- Навигация - 3 основных раздела -->
+            <div class="nav-tabs overflow-x-auto">
+                <button class="nav-tab active" onclick="switchTab('scenarios', this)" data-hotkey="1">
+                    <i class="fas fa-phone mr-2"></i>Сценарии <span class="hotkey ml-2">1</span>
                 </button>
-                <button class="tab-btn px-6 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-white whitespace-nowrap" onclick="switchTab('doc1', this)">
-                    <i class="fas fa-phone mr-2"></i>Сценарии звонков
+                <button class="nav-tab" onclick="switchTab('objections', this)" data-hotkey="2">
+                    <i class="fas fa-shield-alt mr-2"></i>Возражения <span class="hotkey ml-2">2</span>
                 </button>
-                <button class="tab-btn px-6 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-white whitespace-nowrap" onclick="switchTab('doc2', this)">
-                    <i class="fas fa-file-alt mr-2"></i>Скрипты продаж
-                </button>
-                <button class="tab-btn px-6 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-white whitespace-nowrap" onclick="switchTab('doc3', this)">
-                    <i class="fas fa-user-graduate mr-2"></i>Лидогенераторам
+                <button class="nav-tab" onclick="switchTab('scripts', this)" data-hotkey="3">
+                    <i class="fas fa-envelope mr-2"></i>Письма <span class="hotkey ml-2">3</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Контент -->
-    <main class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Главной контент -->
+    <main class="max-w-5xl mx-auto px-4 py-4">
         
-        <!-- ВКЛАДКА 1: ПОИСК -->
-        <div id="tab-search" class="tab-content active">
+        <!-- Мгновенный поиск - всегда виден -->
+        <div class="mb-4 sticky top-[100px] z-40 bg-[#0a0a0a]/95 backdrop-blur py-2">
+            <div class="relative">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Что говорит клиент? (например: 'не нужно', 'дорого', 'пришлите на почту')"
+                    class="w-full instant-search rounded-xl py-4 pl-12 pr-4 text-white placeholder-gray-600"
+                    oninput="instantSearch(this.value)"
+                    autocomplete="off"
+                >
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                    <span class="hotkey">/</span>
+                    <span class="text-xs text-gray-600">поиск</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА 1: СЦЕНАРИИ (по нишам) -->
+        <div id="tab-scenarios" class="tab-content">
             
-            <!-- Поиск -->
-            <div class="mb-6">
-                <div class="relative max-w-3xl mx-auto">
-                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg"></i>
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        placeholder="Введите ключевое слово..."
-                        class="w-full bg-neutral-900 border border-neutral-700 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-gray-500 search-glow transition-all text-lg"
-                        oninput="performSearch(this.value)"
-                    >
+            <!-- Группа 1: Еда -->
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">🍕</span>
+                    <span class="scenario-group-title">Еда / Общепит</span>
+                    <span class="text-xs text-gray-500 ml-auto">2-3 мин</span>
                 </div>
-            </div>
-
-            <!-- Поиск по языкам -->
-            <div class="mb-4">
-                <div class="flex items-center gap-3 mb-3">
-                    <span class="text-gray-500 text-sm"><i class="fas fa-globe mr-1"></i> Язык:</span>
-                    <button class="lang-badge active" onclick="filterByLang('all', this)">
-                        <span class="text-lg">🌍</span> Все языки
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('food1')">
+                        <i class="fas fa-utensils text-orange-400"></i>
+                        Пиццерия / Ресторан
                     </button>
-                    <button class="lang-badge" onclick="filterByLang('ru', this)">
-                        <span class="text-lg">🇷🇺</span> Русский
-                    </button>
-                    <button class="lang-badge" onclick="filterByLang('lv', this)">
-                        <span class="text-lg">🇱🇻</span> Latviešu
-                    </button>
-                    <button class="lang-badge" onclick="filterByLang('en', this)">
-                        <span class="text-lg">🇬🇧</span> English
+                    <button class="trigger-btn" onclick="openScript('food2')">
+                        <i class="fas fa-hamburger text-orange-400"></i>
+                        Фастфуд / Доставка
                     </button>
                 </div>
             </div>
 
-            <!-- Быстрые теги - Расширенные -->
-            <div class="mb-6">
-                <div class="flex items-center gap-2 mb-3 flex-wrap">
-                    <span class="text-gray-500 text-sm"><i class="fas fa-bolt mr-1 text-orange-500"></i> Быстрый поиск:</span>
+            <!-- Группа 2: Авто -->
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">🚗</span>
+                    <span class="scenario-group-title">Авто / Сервис</span>
+                    <span class="text-xs text-gray-500 ml-auto">2-3 мин</span>
                 </div>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <!-- Основные -->
-                    <span class="quick-tag" onclick="quickSearch('постоплата')"><i class="fas fa-credit-card"></i> Постоплата</span>
-                    <span class="quick-tag" onclick="quickSearch('возражения')"><i class="fas fa-shield-alt"></i> Возражения</span>
-                    <span class="quick-tag" onclick="quickSearch('сценарий')"><i class="fas fa-phone"></i> Сценарии</span>
-                    <span class="quick-tag" onclick="quickSearch('email')"><i class="fas fa-envelope"></i> Email</span>
-                    <span class="quick-tag" onclick="quickSearch('холодный')"><i class="fas fa-snowflake"></i> Холодные звонки</span>
-                    <span class="quick-tag" onclick="quickSearch('лидогенератор')"><i class="fas fa-user-plus"></i> Лидогенераторам</span>
-                    
-                    <!-- Ниши -->
-                    <span class="quick-tag" onclick="quickSearch('пиццерия')"><i class="fas fa-pizza-slice"></i> Пиццерия</span>
-                    <span class="quick-tag" onclick="quickSearch('автосервис')"><i class="fas fa-car"></i> Автосервис</span>
-                    <span class="quick-tag" onclick="quickSearch('салон')"><i class="fas fa-cut"></i> Салон красоты</span>
-                    <span class="quick-tag" onclick="quickSearch('юристы')"><i class="fas fa-balance-scale"></i> Юристы</span>
-                    <span class="quick-tag" onclick="quickSearch('ресторан')"><i class="fas fa-utensils"></i> Ресторан</span>
-                    <span class="quick-tag" onclick="quickSearch('медицина')"><i class="fas fa-heartbeat"></i> Медицина</span>
-                    
-                    <!-- Техники -->
-                    <span class="quick-tag" onclick="quickSearch('психология')"><i class="fas fa-brain"></i> Психология</span>
-                    <span class="quick-tag" onclick="quickSearch('продавливание')"><i class="fas fa-hand-rock"></i> Продавливание</span>
-                    <span class="quick-tag" onclick="quickSearch('голос')"><i class="fas fa-microphone"></i> Голос</span>
-                    <span class="quick-tag" onclick="quickSearch('чит-код')"><i class="fas fa-key"></i> Чит-код</span>
-                    
-                    <!-- Типы -->
-                    <span class="quick-tag" onclick="quickSearch('директ')"><i class="fab fa-instagram"></i> Instagram DM</span>
-                    <span class="quick-tag" onclick="quickSearch('редизайн')"><i class="fas fa-paint-brush"></i> Редизайн</span>
-                    <span class="quick-tag" onclick="quickSearch('сайта нет')"><i class="fas fa-globe-slash"></i> Сайта нет</span>
-                    <span class="quick-tag" onclick="quickSearch('партнерство')"><i class="fas fa-handshake"></i> Партнерство</span>
-                    
-                    <!-- Процесс -->
-                    <span class="quick-tag" onclick="quickSearch('поиск клиентов')"><i class="fas fa-search-location"></i> Поиск клиентов</span>
-                    <span class="quick-tag" onclick="quickSearch('передача лида')"><i class="fas fa-exchange-alt"></i> Передача лида</span>
-                    <span class="quick-tag" onclick="quickSearch('цена')"><i class="fas fa-tag"></i> Цена</span>
-                    <span class="quick-tag" onclick="quickSearch('риски')"><i class="fas fa-exclamation-triangle"></i> Риски</span>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('auto1')">
+                        <i class="fas fa-car text-blue-400"></i>
+                        Автосервис / СТО
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('auto2')">
+                        <i class="fas fa-spray-can text-blue-400"></i>
+                        Детейлинг / Мойка
+                    </button>
                 </div>
             </div>
 
-            <!-- Категории -->
-            <div class="mb-6 flex flex-wrap gap-2 justify-center">
-                <button class="category-badge active px-4 py-2 rounded-full bg-neutral-800 text-sm font-medium text-gray-300 border border-neutral-700" onclick="filterCategory('all', this)">
-                    Все разделы
-                </button>
-                <button class="category-badge px-4 py-2 rounded-full bg-neutral-800 text-sm font-medium text-gray-300 border border-neutral-700" onclick="filterCategory('scripts', this)">
-                    <i class="fas fa-phone mr-1"></i> Сценарии звонков
-                </button>
-                <button class="category-badge px-4 py-2 rounded-full bg-neutral-800 text-sm font-medium text-gray-300 border border-neutral-700" onclick="filterCategory('sales', this)">
-                    <i class="fas fa-file-alt mr-1"></i> Скрипты продаж
-                </button>
-                <button class="category-badge px-4 py-2 rounded-full bg-neutral-800 text-sm font-medium text-gray-300 border border-neutral-700" onclick="filterCategory('onboarding', this)">
-                    <i class="fas fa-user-graduate mr-1"></i> Лидогенераторам
-                </button>
+            <!-- Группа 3: Красота -->
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">💅</span>
+                    <span class="scenario-group-title">Красота / Здоровье</span>
+                    <span class="text-xs text-gray-500 ml-auto">3-4 мин</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('beauty1')">
+                        <i class="fas fa-cut text-pink-400"></i>
+                        Салон / Барбершоп
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('beauty2')">
+                        <i class="fas fa-heartbeat text-pink-400"></i>
+                        Клиника / Врачи
+                    </button>
+                </div>
             </div>
 
-            <!-- Результаты -->
-            <div id="resultsContainer" class="space-y-4">
-                <div class="empty-state">
-                    <i class="fas fa-search text-6xl mb-4 text-neutral-800"></i>
-                    <h3 class="text-xl font-semibold text-gray-400 mb-2">Начните поиск</h3>
-                    <p class="text-gray-600 max-w-md mx-auto">Введите ключевые слова или выберите быстрый поиск выше</p>
+            <!-- Группа 4: Профессионалы -->
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">🏢</span>
+                    <span class="scenario-group-title">Проф. услуги</span>
+                    <span class="text-xs text-gray-500 ml-auto">3-4 мин</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('pro1')">
+                        <i class="fas fa-balance-scale text-purple-400"></i>
+                        Юристы / Бухгалтеры
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('pro2')">
+                        <i class="fas fa-building text-purple-400"></i>
+                        Офис / Секретарь
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- ВКЛАДКА 2: СЦЕНАРИИ ТЕЛЕФОННЫХ РАЗГОВОРОВ (ПОЛНЫЙ ДОКУМЕНТ) -->
-        <div id="tab-doc1" class="tab-content">
-            <div class="glass rounded-2xl p-8 border border-orange-500/20">
-                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
-                    <div class="w-16 h-16 vizon-gradient rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-orange-500/30">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-3xl font-bold text-white">Сценарии телефонных разговоров</h2>
-                        <p class="text-gray-400 mt-1">Vižon Studios • February 10, 2026</p>
-                    </div>
-                    <button onclick="copyDoc('doc1-content')" class="ml-auto px-4 py-2 bg-white/5 hover:bg-orange-500/20 border border-white/10 hover:border-orange-500/50 rounded-lg text-sm transition-all">
-                        <i class="fas fa-copy mr-2"></i>Копировать всё
+        <!-- ВКЛАДКА 2: ВОЗРАЖЕНИЯ (критично!) -->
+        <div id="tab-objections" class="tab-content hidden">
+            
+            <div class="mb-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                <p class="text-red-400 text-sm font-semibold flex items-center gap-2">
+                    <i class="fas fa-fire"></i>
+                    Самые частые - нажми мгновенно
+                </p>
+            </div>
+
+            <!-- Группа: Отказы -->
+            <div class="scenario-group border-red-500/30">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">🛑</span>
+                    <span class="scenario-group-title text-red-400">Отказы</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn stress" onclick="openScript('obj1')">
+                        <i class="fas fa-times-circle"></i>
+                        "Нам не нужно"
+                    </button>
+                    <button class="trigger-btn stress" onclick="openScript('obj2')">
+                        <i class="fas fa-times-circle"></i>
+                        "У нас всё есть"
+                    </button>
+                    <button class="trigger-btn stress" onclick="openScript('obj3')">
+                        <i class="fas fa-envelope-open"></i>
+                        "Пришлите на почту"
+                    </button>
+                    <button class="trigger-btn stress" onclick="openScript('obj4')">
+                        <i class="fas fa-user-slash"></i>
+                        "Директора нет"
                     </button>
                 </div>
+            </div>
 
-                <div id="doc1-content" class="space-y-8 text-gray-300 leading-relaxed">
-                    
-                    <!-- Введение -->
-                    <div class="bg-orange-500/5 border border-orange-500/20 rounded-xl p-6">
-                        <p class="text-lg italic">"Что-бы созваниваться, ведь это эффективнее мы сделали для вас сценарии телефонных разговоров которые позволят увидеть суть и прочувствовать каждую сферу разных бизнесов которых вы будете переоформлять под Лидов."</p>
-                        <p class="text-orange-400 mt-2 font-semibold">В конце важный бонус.</p>
-                    </div>
+            <!-- Группа: Деньги -->
+            <div class="scenario-group border-yellow-500/30">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">💰</span>
+                    <span class="scenario-group-title text-yellow-400">Деньги / Время</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn stress" onclick="openScript('money1')">
+                        <i class="fas fa-coins"></i>
+                        "Денег нет"
+                    </button>
+                    <button class="trigger-btn stress" onclick="openScript('money2')">
+                        <i class="fas fa-calendar-times"></i>
+                        "Не сезон"
+                    </button>
+                    <button class="trigger-btn stress" onclick="openScript('money3')">
+                        <i class="fas fa-tag"></i>
+                        "Сколько стоит?"
+                    </button>
+                </div>
+            </div>
 
-                    <!-- Сценарий 1 -->
-                    <div class="doc-scenario">
-                        <h3 class="text-xl font-bold text-orange-400 mb-4 flex items-center gap-2">
-                            <span class="text-2xl">🍕</span> Сценарий 1: ПИЦЦЕРИЯ / ДОСТАВКА ЕДЫ / РЕСТОРАН
-                        </h3>
-                        <div class="space-y-3">
-                            <p><strong class="text-white">Цель:</strong> Официант или админ на кассе. Им вообще пофиг на сайт.</p>
-                            <p><strong class="text-white">Задача:</strong> Взять номер управляющего/владельца.</p>
-                            
-                            <div class="bg-black/30 rounded-lg p-4 font-mono text-sm space-y-2 border-l-2 border-orange-500">
-                                <p><span class="text-green-400">Звонарь:</span> Алло, это {Название}?</p>
-                                <p><span class="text-blue-400">Админ:</span> Да, здравствуйте.</p>
-                                <p><span class="text-green-400">Звонарь:</span> Привет. Слушайте, я звоню не заказ сделать, у меня вопрос по сотрудничеству. Я хотел бы вам заказы передавать, но не могу найти с кем обсудить. Управляющий или владелец сейчас на месте?</p>
-                                <p><span class="text-blue-400">Админ:</span> А по какому вопросу?</p>
-                                <p><span class="text-green-400">Звонарь:</span> Мы занимаемся цифровизацией общепита. У нас есть предложение, как вам онлайн-заказы наладить, чтобы они не терялись. Это не реклама, мы по постоплате работаем. Скиньте номер главного или скажите, когда набрать, чтобы с ним поговорить?</p>
-                                <p><span class="text-blue-400">Админ:</span> Ну запишите номер... (или "Перезвоните после 14:00").</p>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Группа: Конкуренты -->
+            <div class="scenario-group border-blue-500/30">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">📱</span>
+                    <span class="scenario-group-title text-blue-400">Конкуренты</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('comp1')">
+                        <i class="fab fa-instagram"></i>
+                        "У нас есть Инстаграм"
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('comp2')">
+                        <i class="fas fa-globe"></i>
+                        "У нас есть сайт"
+                    </button>
+                </div>
+            </div>
 
-                    <!-- Сценарий 2 -->
-                    <div class="doc-scenario">
-                        <h3 class="text-xl font-bold text-orange-400 mb-4 flex items-center gap-2">
-                            <span class="text-2xl">🚗</span> Сценарий 2: АВТОСЕРВИС / ДЕТЕЙЛИНГ / СТРОЙКА
-                        </h3>
-                        <div class="space-y-3">
-                            <p><strong class="text-white">Цель:</strong> Там обычно сидит суровый мужик или замотанный менеджер.</p>
-                            <p><strong class="text-white">Задача:</strong> Зайти через "хочу дать вам работу".</p>
-                            
-                            <div class="bg-black/30 rounded-lg p-4 font-mono text-sm space-y-2 border-l-2 border-orange-500">
-                                <p><span class="text-green-400">Звонарь:</span> Алло, {Название}? Ремонтом занимаетесь?</p>
-                                <p><span class="text-blue-400">Сотрудник:</span> Да.</p>
-                                <p><span class="text-green-400">Звонарь:</span> Отлично. Смотрите, я хочу вам клиентов подгонять на ремонт/услуги. Нашел вас на картах, вижу вы толковые ребята. С кем можно перетереть насчет партнерства? С главным можно соединить или мобильный его дадите?</p>
-                                <p><span class="text-blue-400">Сотрудник:</span> А что за клиенты?</p>
-                                <p><span class="text-green-400">Звонарь:</span> Я из студии Vižon. Мы делаем сайты, которые генерируют заявки. Хочу предложить владельцу сделать нормальный сайт бесплатно (по постоплате), чтобы у вас работы больше было. Дайте его контакт, я ему в Ватсап напишу суть, чтобы вас не отвлекать.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Сценарий 3 -->
-                    <div class="doc-scenario">
-                        <h3 class="text-xl font-bold text-orange-400 mb-4 flex items-center gap-2">
-                            <span class="text-2xl">💅</span> Сценарий 3: САЛОН КРАСОТЫ / БАРБЕРШОП / КЛИНИКА
-                        </h3>
-                        <div class="space-y-3">
-                            <p><strong class="text-white">Цель:</strong> Девочка-администратор. Она боится давать номер босса.</p>
-                            <p><strong class="text-white">Задача:</strong> Быть вежливым, но настойчивым.</p>
-                            
-                            <div class="bg-black/30 rounded-lg p-4 font-mono text-sm space-y-2 border-l-2 border-orange-500">
-                                <p><span class="text-green-400">Звонарь:</span> Добрый день, салон {Название}?</p>
-                                <p><span class="text-blue-400">Админ:</span> Да.</p>
-                                <p><span class="text-green-400">Звонарь:</span> Девушка, подскажите, а как с владелицей или управляющей связаться? У меня предложение по маркетингу, хотим ваш салон бесплатно прорекламировать через новый сайт.</p>
-                                <p><span class="text-blue-400">Админ:</span> Пишите на почту / Мы не заинтересованы.</p>
-                                <p><span class="text-green-400">Звонарь:</span> Понимаю вашу работу. Но смотрите, мы работаем без предоплаты. Директор ничего не теряет, а вы можете получить больше клиентов (и чаевых). Я просто хочу передать контакт моему разработчику, он ей наберет на 2 минуты. Если скажет "нет" --- больше не побеспокоим. Какой у неё рабочий номер?</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Сценарий 4 -->
-                    <div class="doc-scenario">
-                        <h3 class="text-xl font-bold text-orange-400 mb-4 flex items-center gap-2">
-                            <span class="text-2xl">🏢</span> Сценарий 4: ЮРИСТЫ / БУХГАЛТЕРЫ / ОФИСЫ
-                        </h3>
-                        <div class="space-y-3">
-                            <p><strong class="text-white">Цель:</strong> Секретарь.</p>
-                            <p><strong class="text-white">Задача:</strong> Пройти фильтр.</p>
-                            
-                            <div class="bg-black/30 rounded-lg p-4 font-mono text-sm space-y-2 border-l-2 border-orange-500">
-                                <p><span class="text-green-400">Звонарь:</span> Добрый день. Соедините с генеральным директором, пожалуйста.</p>
-                                <p><span class="text-blue-400">Секретарь:</span> По какому вопросу?</p>
-                                <p><span class="text-green-400">Звонарь:</span> По вопросу интернет-присутствия вашей компании. Я вижу у вас проблемы с индексацией сайта (или "сайта вообще нет"), вы теряете клиентов. У меня поручение от руководителя студии Vižon связаться с вашим директором лично.</p>
-                                <p><span class="text-blue-400">Секретарь:</span> Пришлите КП на почту.</p>
-                                <p><span class="text-green-400">Звонарь:</span> Я пришлю, но вопрос срочный. Давайте так: вы мне дадите его прямой номер или почту, я ему напишу, что это от Vižon. Мы работаем по факту выполненных работ, так что директору это будет интересно.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Отмазки -->
-                    <div class="doc-section">
-                        <h3 class="text-2xl font-bold text-white mb-4">🆘 ГЛАВНЫЕ ОТМАЗКИ (Как их обходить)</h3>
-                        <p class="text-gray-400 mb-4 italic">Твои люди должны знать это как «Отче наш».</p>
-
-                        <div class="space-y-4">
-                            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                                <h4 class="font-bold text-red-400 mb-2">1. «Нам ничего не нужно / У нас всё есть»</h4>
-                                <p class="text-green-400 font-mono text-sm">Ответ: «Я вас понял. Но я не продаю ничего. Мы предлагаем сделать сайт, вы смотрите. Если нравится --- берете. Вы вообще ничем не рискуете. Дайте просто номер директора, он сам решит, нужна ему халява или нет».</p>
-                            </div>
-
-                            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                                <h4 class="font-bold text-red-400 mb-2">2. «Пришлите на почту»</h4>
-                                <p class="text-green-400 font-mono text-sm">Ответ: «Конечно пришлю. Но почту никто не читает. Давайте я лучше вашему главному в Вотсап/Телеграм напишу коротко? Продиктуйте номер».</p>
-                            </div>
-
-                            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                                <h4 class="font-bold text-red-400 mb-2">3. «Директора нет»</h4>
-                                <p class="text-green-400 font-mono text-sm">Ответ: «Окей. А когда будет? Или дайте его мобильный, я ему смс скину, он сам перезвонит, когда освободится».</p>
-                            </div>
-
-                            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                                <h4 class="font-bold text-red-400 mb-2">4. «У нас есть Инстаграм / Фейсбук, нам хватает»</h4>
-                                <p class="text-green-400 font-mono text-sm">«Согласен, у вас крутой Инстаграм, я видел! Но Инстаграм --- это как съемная квартира: сегодня он есть, завтра теневой бан или блокировка. А сайт --- это ваша собственность. Плюс, люди ищут "пиццу/стрижку" в Гугле, а не в Инсте. Вы теряете этих клиентов. Давайте мы сделаем вам легкий сайт в дополнение к Инсте? Оплата только если понравится результат».</p>
-                            </div>
-
-                            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-                                <h4 class="font-bold text-red-400 mb-2">5. «Денег нет / У нас не сезон»</h4>
-                                <p class="text-green-400 font-mono text-sm">«Так я поэтому и звоню! Я же не прошу денег сейчас. Мы работаем по постоплате. Вы платите, когда у вас уже будет готовый инструмент, который начнет приносить деньги. Это идеальный вариант для "не сезона". Давайте просто обсудим идею?»</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Психология -->
-                    <div class="doc-section">
-                        <h3 class="text-2xl font-bold text-white mb-4">🧠 Психологическая установка</h3>
-                        <div class="bg-purple-500/10 border border-purple-500/20 rounded-lg p-6">
-                            <p class="text-lg mb-4">Ты не просишь, ты предлагаешь. Ты идешь к ним с чемоданом денег (клиентов), а не с протянутой рукой. Если они отказываются - это их проблема, а не твоя.</p>
-                            
-                            <p class="mb-4"><strong class="text-purple-400">Голос решает.</strong> Говори медленно, уверенно и низким голосом. Тараторящих "продажников" посылают. Спокойных "партнеров" слушают.</p>
-                            
-                            <p class="text-xl text-orange-400 font-bold mb-4">Волшебное слово "ПОСТОПЛАТА". Это твой таран. Используй его в каждом втором предложении, если клиент сопротивляется.</p>
-
-                            <div class="bg-black/30 rounded-lg p-4 font-mono text-sm">
-                                <p class="text-gray-400 mb-2">Пример диалога "Продавливание":</p>
-                                <p><span class="text-red-400">--- Нам не надо.</span></p>
-                                <p><span class="text-green-400">--- Понимаю. Но мы работаем без предоплаты.</span></p>
-                                <p><span class="text-red-400">--- Ну у нас есть сайт.</span></p>
-                                <p><span class="text-green-400">--- Он устарел. Мы сделаем новый без предоплаты. Вы ничего не теряете.</span></p>
-                                <p><span class="text-red-400">--- Ну я не знаю...</span></p>
-                                <p><span class="text-green-400">--- Давайте мой разработчик просто позвонит на 2 минуты?</span></p>
-                                <p><span class="text-red-400">--- Ну ладно, записывайте номер...</span></p>
-                            </div>
-                        </div>
-                    </div>
-
+            <!-- Психология -->
+            <div class="scenario-group border-green-500/30">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">🧠</span>
+                    <span class="scenario-group-title text-green-400">Психология</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn success" onclick="openScript('psy1')">
+                        <i class="fas fa-key"></i>
+                        Чит-код: ПОСТОПЛАТА
+                    </button>
+                    <button class="trigger-btn success" onclick="openScript('psy2')">
+                        <i class="fas fa-microphone"></i>
+                        Голос и интонации
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- ВКЛАДКА 3: СКРИПТЫ ПРОДАЖ (ПОЛНЫЙ ДОКУМЕНТ) -->
-        <div id="tab-doc2" class="tab-content">
-            <div class="glass rounded-2xl p-8 border border-blue-500/20">
-                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
-                    <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/30">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-3xl font-bold text-white">Скрипты продаж / Sales Scripts</h2>
-                        <p class="text-gray-400 mt-1">Vižon Studios • February 10, 2026</p>
-                    </div>
-                    <button onclick="copyDoc('doc2-content')" class="ml-auto px-4 py-2 bg-white/5 hover:bg-blue-500/20 border border-white/10 hover:border-blue-500/50 rounded-lg text-sm transition-all">
-                        <i class="fas fa-copy mr-2"></i>Копировать всё
+        <!-- ВКЛАДКА 3: ПИСЬМА -->
+        <div id="tab-scripts" class="tab-content hidden">
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">📧</span>
+                    <span class="scenario-group-title">Email шаблоны</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('email1')">
+                        <i class="fas fa-redo text-blue-400"></i>
+                        Редизайн (сайт есть)
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('email2')">
+                        <i class="fas fa-plus-circle text-green-400"></i>
+                        Новый сайт (нет сайта)
                     </button>
                 </div>
+            </div>
 
-                <div id="doc2-content" class="space-y-8 text-gray-300 leading-relaxed">
-                    
-                    <!-- Русский -->
-                    <div class="doc-section border-l-blue-500">
-                        <h3 class="text-2xl font-bold text-blue-400 mb-4 flex items-center gap-2">
-                            <span class="text-3xl">🇷🇺</span> РУССКИЙ ЯЗЫК
-                        </h3>
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">💬</span>
+                    <span class="scenario-group-title">Direct Message</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('dm1')">
+                        <i class="fab fa-instagram text-pink-400"></i>
+                        Instagram DM
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('dm2')">
+                        <i class="fab fa-telegram text-blue-400"></i>
+                        Telegram
+                    </button>
+                </div>
+            </div>
 
-                        <div class="doc-scenario border-blue-500/30">
-                            <h4 class="text-lg font-bold text-white mb-3">📧 СИТУАЦИЯ 1: Сайт есть, но он устарел</h4>
-                            
-                            <div class="mb-4">
-                                <h5 class="font-semibold text-blue-400 mb-2">Вариант 1: Холодное письмо (Email)</h5>
-                                <p class="text-sm text-gray-400 mb-3">Строгий, деловой стиль.</p>
-                                
-                                <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-3 border-l-2 border-blue-500">
-                                    <p><strong>Тема:</strong> Идея редизайна для {Название_Компании} (оплата по факту)</p>
-                                    <p><strong>Или:</strong> Концепт обновления сайта {Название_Компании}</p>
-                                    
-                                    <p>Здравствуйте, {Имя или Команда}!</p>
-                                    
-                                    <p>Пишу вам, так как увидел ваш бизнес в {Где нашли}, и мне очень понравился ваш продукт/сервис. Видно, что держите уровень.</p>
-                                    
-                                    <p>Именно поэтому обратил внимание на ваш текущий сайт. Честно говоря, он немного отстает от качества вашего сервиса. Сейчас он выглядит слегка статичным и сложным для восприятия клиента (особенно с телефона).</p>
-                                    
-                                    <p><strong>Кто мы:</strong><br>
-                                    Мы команда разработчиков, которая не просто «делает сайты», а занимается полным редизайном. Мы убираем визуальный шум и делаем «живой дизайн» - понятный, с современной анимацией, который ведет клиента за руку к покупке.</p>
-                                    
-                                    <p><strong>Наше предложение уникально для рынка:</strong><br>
-                                    Мы настолько уверены в качестве своих работ, что готовы работать по постоплате.</p>
-                                    
-                                    <ul class="list-disc ml-5 space-y-1">
-                                        <li>Мы разрабатываем концепт и показываем результат.</li>
-                                        <li>Вы платите только если нравится.</li>
-                                        <li>Рисков для вас - ноль.</li>
-                                    </ul>
-                                    
-                                    <p>Мой ведущий разработчик (он отвечает за всю визуальную часть) готов созвониться с вами на 5-10 минут, показать примеры «живых» интерфейсов и объяснить, как мы можем освежить именно ваш проект.</p>
-                                    
-                                    <p>Когда вам удобно услышать его идеи?</p>
-                                    
-                                    <p>С уважением,<br>
-                                    {Имя Лидгена}<br>
-                                    Менеджер проектов</p>
-                                </div>
-                            </div>
-
-                            <div class="mb-4">
-                                <h5 class="font-semibold text-blue-400 mb-2">Вариант 2: Соцсети (Direct Message)</h5>
-                                <p class="text-sm text-gray-400 mb-3">Теплый, быстрый заход через визуал.</p>
-                                
-                                <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-2 border-l-2 border-blue-500">
-                                    <p>Привет, {Название_Бренда}! 👋</p>
-                                    
-                                    <p>У вас очень крутой контент в профиле, но я перешел по ссылке на сайт и заметил сильный контраст. Ваши соцсети живые и сочные, а сайт кажется немного устаревшим и сложным. Клиенту там легко потеряться.</p>
-                                    
-                                    <p>Мы с командой как раз специализируемся на редизайне: берем сложные сайты и переделываем их в понятные, «живые» истории с крутой анимацией.</p>
-                                    
-                                    <p>Хотим предложить вам обновить визуал.</p>
-                                    
-                                    <p>Самое главное: мы работаем без предоплаты. Сначала делаем - вы смотрите, щупаете. Если нравится и видите разницу - платите. Никаких рисков.</p>
-                                    
-                                    <p>Давайте мой ведущий разработчик наберет вас, расскажет свое видение по вашему сайту? Обсудим ваши предпочтения, контент сайта и конечную цену, это займет пару минут.</p>
-                                    
-                                    <p>Что скажете?</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="doc-scenario border-blue-500/30">
-                            <h4 class="text-lg font-bold text-white mb-3">📧 СИТУАЦИЯ 2: Сайта у компании нет</h4>
-                            
-                            <div class="mb-4">
-                                <h5 class="font-semibold text-blue-400 mb-2">Вариант 3: Холодное письмо (Email)</h5>
-                                
-                                <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-3 border-l-2 border-blue-500">
-                                    <p><strong>Тема:</strong> Сайт для {Название_Компании} (модель работы без предоплаты)</p>
-                                    <p><strong>Или:</strong> Вопрос по онлайн-репутации {Название_Компании}</p>
-                                    
-                                    <p>Здравствуйте, {Имя или Команда}!</p>
-                                    
-                                    <p>Пишу вам, так как нашел вашу компанию в {Карты/Каталог} при поиске услуг в вашем районе. У вас отличная репутация и отзывы, это вызывает уважение.</p>
-                                    
-                                    <p>Но я заметил одну деталь, которая сдерживает ваш рост: отсутствие современного веб-сайта.</p>
-                                    
-                                    <p>В нашей сфере (будь то юридические услуги, автосервис или медицина) клиенты сначала «гуглят». Если они не находят понятный сайт с ценами и услугами - они уходят к конкурентам, у которых он есть. Вы теряете «теплых» клиентов каждый день.</p>
-                                    
-                                    <p><strong>Кто мы:</strong><br>
-                                    Меня зовут {Имя Лидгена}, я представляю студию Vižon.</p>
-                                    
-                                    <p>Мы не делаем шаблонные сайты-визитки. Мы создаем премиальный «живой дизайн» - понятный, интерактивный и вызывающий доверие с первой секунды.</p>
-                                    
-                                    <p><strong>Наше главное отличие:</strong><br>
-                                    Мы знаем, как сложно найти надежных подрядчиков. Обычно агентства просят 50% предоплаты за «кота в мешке».</p>
-                                    
-                                    <p>Vižon работает иначе. Мы работаем строго по постоплате:</p>
-                                    
-                                    <ul class="list-disc ml-5 space-y-1">
-                                        <li>Мы разрабатываем концепт и демонстрируем его вам.</li>
-                                        <li>Вы видите реальный, работающий продукт.</li>
-                                        <li>Оплачиваете только если результат вас устраивает.</li>
-                                        <li>Рисков для вас - 0.</li>
-                                    </ul>
-                                    
-                                    <p>Мой ведущий разработчик готов уделить вам 5-10 минут, чтобы объяснить, как сайт окупится в вашем бизнесе, обсудить ваши предпочтения и конечную цену.</p>
-                                    
-                                    <p>Найдется время для короткого звонка на этой неделе?</p>
-                                    
-                                    <p>С уважением,<br>
-                                    {Имя Лидгена}<br>
-                                    Partner Manager, Vižon</p>
-                                </div>
-                            </div>
-
-                            <div class="mb-4">
-                                <h5 class="font-semibold text-blue-400 mb-2">Вариант 4: Соцсети (Direct Message)</h5>
-                                
-                                <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-2 border-l-2 border-blue-500">
-                                    <p>Здравствуйте, {Название_Компании}! 👋</p>
-                                    
-                                    <p>Увидел вас в поиске/картах, у вас отличный рейтинг! Но заметил, что у вас нет ссылки на сайт.</p>
-                                    
-                                    <p>В 2026 году это потеря клиентов. Люди хотят видеть услуги и цены онлайн, удобно и с телефона. Без сайта доверие к бизнесу всегда ниже.</p>
-                                    
-                                    <p>Мы - студия Vižon. Мы делаем премиальные сайты с «живым» дизайном, которые закрывают клиентов на сделку.</p>
-                                    
-                                    <p>Сразу к делу: Мы настолько уверены в качестве, что работаем без предоплаты.</p>
-                                    
-                                    <p>Сначала делаем сайт -> Вы смотрите -> Если нравится, платите.</p>
-                                    
-                                    <p>Хотите, мой коллега (ведущий разработчик) вам наберет и расскажет, как это может выглядеть для вашего бизнеса? Это бесплатно и займет пару минут.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Латышский -->
-                    <div class="doc-section border-l-red-500">
-                        <h3 class="text-2xl font-bold text-red-400 mb-4 flex items-center gap-2">
-                            <span class="text-3xl">🇱🇻</span> LATVIEŠU VALODA
-                        </h3>
-
-                        <div class="doc-scenario border-red-500/30">
-                            <h4 class="text-lg font-bold text-white mb-3">📧 GADĪJUMĀ, JA MĀJASLAPA IR, BET TĀ IR NOVECOJUSI</h4>
-                            
-                            <div class="mb-4">
-                                <h5 class="font-semibold text-red-400 mb-2">Variants 1: Auksts e-pasts (Email)</h5>
-                                <p class="text-sm text-gray-400 mb-3">Lietišķs stils.</p>
-                                
-                                <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-3 border-l-2 border-red-500">
-                                    <p><strong>Tēma:</strong> Redizaina ideja uzņēmumam {Uzņēmuma_Nosaukums} (apmaksa pēc rezultāta)</p>
-                                    <p><strong>Vai:</strong> {Uzņēmuma_Nosaukums} mājaslapas atjaunošanas koncepts</p>
-                                    
-                                    <p>Labdien, {Vārds vai Komanda}!</p>
-                                    
-                                    <p>Rakstu jums, jo pamanīju jūsu biznesu {Kur atradāt}, un man ļoti iepatikās jūsu produkts/pakalpojums. Ir redzams, ka uzturat augstu līmeni.</p>
-                                    
-                                    <p>Tieši tāpēc pievērsu uzmanību jūsu pašreizējai mājaslapai. Godīgi sakot, tā nedaudz atpaliek no jūsu servisa kvalitātes. Šobrīd tā izskatās nedaudz statiska un klientam grūti uztverama (it īpaši no telefona).</p>
-                                    
-                                    <p><strong>Kas mēs esam:</strong><br>
-                                    Mēs esam izstrādātāju komanda, kas nevis vienkārši "taisa mājaslapas", bet nodarbojas ar pilnu redizainu. Mēs noņemam vizuālo troksni un veidojam "dzīvo dizainu" - saprotamu, ar mūsdienīgu animāciju, kas burtiski aizved klientu līdz pirkumam.</p>
-                                    
-                                    <p><strong>Mūsu piedāvājums ir unikāls tirgū:</strong><br>
-                                    Mēs esam tik pārliecināti par savu darbu kvalitāti, ka esam gatavi strādāt ar pēcapmaksu.</p>
-                                    
-                                    <ul class="list-disc ml-5 space-y-1">
-                                        <li>Mēs izstrādājam konceptu un parādam rezultātu.</li>
-                                        <li>Jūs maksājat tikai tad, ja jums patīk.</li>
-                                        <li>Risku jums nav - nulle.</li>
-                                    </ul>
-                                    
-                                    <p>Mans vadošais izstrādātājs (kurš atbild par visu vizuālo daļu) ir gatavs sazvanīties ar jums uz 5-10 minūtēm, parādīt "dzīvu" interfeisu piemērus un paskaidrot, kā mēs varam atsvaidzināt tieši jūsu projektu.</p>
-                                    
-                                    <p>Kad jums būtu ērti uzklausīt viņa idejas?</p>
-                                    
-                                    <p>Ar cieņu,<br>
-                                    {Jūsu Vārds}<br>
-                                    Projektu vadītājs</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="doc-scenario border-red-500/30">
-                            <h4 class="text-lg font-bold text-white mb-3">📧 GADĪJUMĀ, JA UZŅĒMUMAM MĀJASLAPAS NAV</h4>
-                            
-                            <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-3 border-l-2 border-red-500">
-                                <p><strong>Tēma:</strong> Mājaslapa uzņēmumam {Uzņēmuma_Nosaukums} (darba modelis bez priekšapmaksas)</p>
-                                <p><strong>Vai:</strong> Jautājums par {Uzņēmuma_Nosaukums} tiešsaistes reputāciju</p>
-                                
-                                <p>Labdien, {Vārds vai Komanda}!</p>
-                                
-                                <p>Rakstu jums, jo atradu jūsu uzņēmumu {Kartēs/Katalogā}, meklējot pakalpojumus jūsu rajonā. Jums ir lieliska reputācija un atsauksmes, tas vieš cieņu.</p>
-                                
-                                <p>Tomēr es pamanīju vienu detaļu, kas kavē jūsu izaugsmi: mūsdienīgas mājaslapas trūkums.</p>
-                                
-                                <p>Mūsu nozarē (vai tie būtu juridiskie pakalpojumi, autoserviss vai medicīna) klienti vispirms "gūglē". Ja viņi neatrod saprotamu lapu ar cenām un pakalpojumiem - viņi aiziet pie konkurentiem, kam tāda ir. Jūs zaudējat "siltos" klientus katru dienu.</p>
-                                
-                                <p><strong>Kas mēs esam:</strong><br>
-                                Mani sauc {Jūsu Vārds}, es pārstāvu studiju Vižon.</p>
-                                
-                                <p>Mēs neveidojam šabloniskas "vizītkartes". Mēs radām premium klases "dzīvo dizainu" - saprotamu, interaktīvu un izraisot uzticību no pirmās sekundes.</p>
-                                
-                                <p><strong>Mūsu galvenā atšķirība:</strong><br>
-                                Mēs zinām, cik grūti ir atrast uzticamus sadarbības partnerus. Parasti aģentūras prasa 50% priekšapmaksu par "kaķi maisā".</p>
-                                
-                                <p>Vižon strādā citādi. Mēs strādājam stingri ar pēcapmaksu:</p>
-                                
-                                <ul class="list-disc ml-5 space-y-1">
-                                    <li>Mēs izstrādājam konceptu un demonstrējam to jums.</li>
-                                    <li>Jūs redzat reālu, strādājošu produktu.</li>
-                                    <li>Maksājat tikai tad, ja rezultāts jūs apmierina.</li>
-                                    <li>Risku jums nav - 0.</li>
-                                </ul>
-                                
-                                <p>Mans vadošais izstrādātājs ir gatavs veltīt jums 5-10 minūtes, lai paskaidrotu, kā mājaslapa atmaksāsies jūsu biznesā, apspriestu jūsu vēlmes un gala cenu.</p>
-                                
-                                <p>Vai atrastos laiks īsam zvanam šonedēļ?</p>
-                                
-                                <p>Ar cieņu,<br>
-                                {Jūsu Vārds}<br>
-                                Partner Manager, Vižon</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Английский -->
-                    <div class="doc-section border-l-green-500">
-                        <h3 class="text-2xl font-bold text-green-400 mb-4 flex items-center gap-2">
-                            <span class="text-3xl">🇬🇧</span> ENGLISH LANGUAGE
-                        </h3>
-
-                        <div class="doc-scenario border-green-500/30">
-                            <h4 class="text-lg font-bold text-white mb-3">📧 SCENARIO 1: Site exists, but is outdated</h4>
-                            
-                            <div class="mb-4">
-                                <h5 class="font-semibold text-green-400 mb-2">Option 1: Cold Email</h5>
-                                <p class="text-sm text-gray-400 mb-3">Professional tone.</p>
-                                
-                                <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-3 border-l-2 border-green-500">
-                                    <p><strong>Subject:</strong> Redesign concept for {Company_Name} (Payment upon satisfaction)</p>
-                                    <p><strong>Or:</strong> Website update idea for {Company_Name}</p>
-                                    
-                                    <p>Hello, {Name or Team}!</p>
-                                    
-                                    <p>I am writing to you because I saw your business on {Source/Where you found them}, and I really liked your product/service. It is clear that you maintain a high standard.</p>
-                                    
-                                    <p>That is exactly why I paid attention to your current website. Honestly, it lags a bit behind the quality of your service. Right now, it looks somewhat static and difficult for a client to perceive (especially from a phone).</p>
-                                    
-                                    <p><strong>Who we are:</strong><br>
-                                    We are a team of developers who don't just "make websites," but specialize in full redesigns. We remove visual noise and create "live design" - clear, with modern animation that leads the client by the hand to a purchase.</p>
-                                    
-                                    <p><strong>Our offer is unique to the market:</strong><br>
-                                    We are so confident in the quality of our work that we are ready to work on a post-payment basis.</p>
-                                    
-                                    <ul class="list-disc ml-5 space-y-1">
-                                        <li>We develop a concept and show you the result.</li>
-                                        <li>You pay only if you like it.</li>
-                                        <li>Zero risk for you.</li>
-                                    </ul>
-                                    
-                                    <p>My Lead Developer (who is responsible for the entire visual part) is ready to jump on a 5-10 minute call with you to show examples of "live" interfaces and explain how we can refresh your specific project.</p>
-                                    
-                                    <p>When would be a convenient time for you to hear his ideas?</p>
-                                    
-                                    <p>Best regards,<br>
-                                    {Your Name}<br>
-                                    Project Manager</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="doc-scenario border-green-500/30">
-                            <h4 class="text-lg font-bold text-white mb-3">📧 SCENARIO 2: No website</h4>
-                            
-                            <div class="bg-black/40 rounded-lg p-4 font-mono text-sm space-y-3 border-l-2 border-green-500">
-                                <p><strong>Subject:</strong> Website for {Company_Name} (No prepayment model)</p>
-                                <p><strong>Or:</strong> Question regarding {Company_Name}'s online reputation</p>
-                                
-                                <p>Hello, {Name or Team}!</p>
-                                
-                                <p>I am writing because I found your company in {Maps/Directory} while searching for services in your area. You have an excellent reputation and reviews, which commands respect.</p>
-                                
-                                <p>However, I noticed one detail that is holding back your growth: the lack of a modern website.</p>
-                                
-                                <p>In our field (whether it be legal services, auto repair, or medicine), clients "Google" first. If they don't find a clear site with prices and services, they leave for competitors who have one. You are losing "warm" clients every day.</p>
-                                
-                                <p><strong>Who we are:</strong><br>
-                                My name is {Your Name}, and I represent the Vižon studio.</p>
-                                
-                                <p>We don't make template "business card" sites. We create premium "live design" - clear, interactive, and inspiring trust from the very first second.</p>
-                                
-                                <p><strong>Our main difference:</strong><br>
-                                We know how hard it is to find reliable contractors. Usually, agencies ask for a 50% prepayment for a "pig in a poke" (uncertain outcome).</p>
-                                
-                                <p>Vižon works differently. We work strictly on post-payment:</p>
-                                
-                                <ul class="list-disc ml-5 space-y-1">
-                                    <li>We develop the concept and demonstrate it to you.</li>
-                                    <li>You see a real, working product.</li>
-                                    <li>You pay only if the result satisfies you.</li>
-                                    <li>Risks for you - 0.</li>
-                                </ul>
-                                
-                                <p>My Lead Developer is ready to spare 5-10 minutes to explain how a site will pay for itself in your business, discuss your preferences, and discuss the final price.</p>
-                                
-                                <p>Do you have time for a short call this week?</p>
-                                
-                                <p>Best regards,<br>
-                                {Your Name}<br>
-                                Partner Manager, Vižon</p>
-                            </div>
-                        </div>
-                    </div>
-
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">🌍</span>
+                    <span class="scenario-group-title">Языки</span>
+                </div>
+                <div class="flex flex-wrap">
+                    <button class="trigger-btn" onclick="openScript('lv1')">
+                        <span class="text-lg">🇱🇻</span>
+                        Latviešu (LV)
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('en1')">
+                        <span class="text-lg">🇬🇧</span>
+                        English (EN)
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- ВКЛАДКА 4: ЛИДОГЕНЕРАТОРАМ (ПОЛНЫЙ ДОКУМЕНТ) -->
-        <div id="tab-doc3" class="tab-content">
-            <div class="glass rounded-2xl p-8 border border-green-500/20">
-                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-white/10">
-                    <div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-green-500/30">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-3xl font-bold text-white">Письмо Лидогенераторам</h2>
-                        <p class="text-gray-400 mt-1">Vižon Studios • February 10, 2026</p>
-                    </div>
-                    <button onclick="copyDoc('doc3-content')" class="ml-auto px-4 py-2 bg-white/5 hover:bg-green-500/20 border border-white/10 hover:border-green-500/50 rounded-lg text-sm transition-all">
-                        <i class="fas fa-copy mr-2"></i>Копировать всё
-                    </button>
-                </div>
+        <!-- Результаты поиска -->
+        <div id="searchResults" class="hidden space-y-3">
+            <!-- Заполняется JS -->
+        </div>
 
-                <div id="doc3-content" class="space-y-8 text-gray-300 leading-relaxed">
-                    
-                    <!-- Приветствие -->
-                    <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
-                        <h3 class="text-2xl font-bold text-green-400 mb-3 flex items-center gap-2">
-                            <span class="text-3xl">🚀</span> Гайд для партнера Vižon
-                        </h3>
-                        <p class="text-lg">Добро пожаловать в команду! Мы занимаемся <strong class="text-white">премиальной веб-разработкой</strong>. Твоя задача - находить клиентов и передавать их мне на закрытие сделки. Твой заработок - <strong class="text-green-400">% от каждого закрытого проекта</strong>.</p>
-                        
-                        <p class="mt-4 text-gray-400">Продавать нас легко, потому что у нас есть «чит-код», которого нет у других. Читай ниже. 👇</p>
-                    </div>
-
-                    <!-- Что продаем -->
-                    <div class="doc-section border-l-green-500">
-                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <span class="text-2xl">💎</span> Что мы продаем?
-                        </h3>
-                        
-                        <div class="bg-black/30 rounded-lg p-6 border border-white/10">
-                            <p class="text-lg mb-4">Мы не делаем дешевые шаблоны. Мы делаем <span class="text-green-400 font-bold text-xl">Vižon</span> - это «живой дизайн», анимация, стиль и смыслы.</p>
-                            
-                            <p class="mb-4">Наши сайты выглядят дорого и реально продают.</p>
-                            
-                            <div class="bg-green-500/10 rounded-lg p-4 border border-green-500/20">
-                                <p class="font-semibold text-green-400 mb-2">Целевая аудитория:</p>
-                                <p>Локальный бизнес (рестораны, стройка, юристы, автосервисы, врачи), у которых <strong class="text-white">нет сайта</strong> или он <strong class="text-white">очень старый/страшный</strong>.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Чит-код -->
-                    <div class="doc-section border-l-orange-500">
-                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <span class="text-2xl">🔥</span> Твой главный козырь (Чит-код)
-                        </h3>
-                        
-                        <div class="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6">
-                            <p class="text-gray-400 mb-4">Обычно клиенты посылают менеджеров, потому что боятся: «Заплачу деньги, а сделают фигню».</p>
-                            
-                            <div class="text-center py-4">
-                                <p class="text-3xl font-black text-orange-400 mb-2">МЫ РАБОТАЕМ ПО ПОСТОПЛАТЕ</p>
-                                <p class="text-sm text-gray-500 uppercase tracking-widest">Это твой главный аргумент</p>
-                            </div>
-                            
-                            <div class="bg-black/40 rounded-lg p-4 font-mono text-sm border-l-4 border-orange-500 mt-4">
-                                <p class="text-gray-400 mb-2">Ты говоришь клиенту:</p>
-                                <p class="text-lg text-white">"Мы сделаем сайт, вы увидите результат. Если понравится - оплачиваете. Если нет - расходимся. Рисков ноль."</p>
-                            </div>
-                            
-                            <p class="mt-4 text-green-400 font-semibold">От такого предложения бизнесу очень сложно отказаться.</p>
-                        </div>
-                    </div>
-
-                    <!-- Алгоритм -->
-                    <div class="doc-section border-l-blue-500">
-                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <span class="text-2xl">⚙️</span> Твои действия (Алгоритм)
-                        </h3>
-
-                        <div class="space-y-6">
-                            <!-- Шаг 1 -->
-                            <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
-                                <h4 class="text-lg font-bold text-blue-400 mb-3 flex items-center gap-2">
-                                    <span class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                                    Поиск (Где искать?)
-                                </h4>
-                                
-                                <div class="space-y-4">
-                                    <div class="flex items-start gap-3">
-                                        <i class="fas fa-map-marked-alt text-blue-400 mt-1"></i>
-                                        <div>
-                                            p class="font-semibold text-white">Google Maps / 2GIS</p>
-                                            <p class="text-sm text-gray-400">Ищи компании в хороших районах с рейтингом 4.0+, но <strong class="text-orange-400">без кнопки «Веб-сайт»</strong> или с ссылкой на уродливый сайт 2010 года.</p>
-                                            <p class="text-green-400 text-sm mt-1"><i class="fas fa-star mr-1"></i>САМЫЙ УДОБНЫЙ СПОСОБ: <a href="https://zl.lv/?lang=lv" class="underline hover:text-white">https://zl.lv/?lang=lv</a></p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="flex items-start gap-3">
-                                        <i class="fab fa-instagram text-pink-400 mt-1"></i>
-                                        <div>
-                                            <p class="font-semibold text-white">Instagram</p>
-                                            <p class="text-sm text-gray-400">Ищи магазины/услуги, которые продают только через Директ.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Шаг 2 -->
-                            <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl p-6">
-                                <h4 class="text-lg font-bold text-purple-400 mb-3 flex items-center gap-2">
-                                    <span class="bg-purple-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
-                                    Касание (Пишем письмо)
-                                </h4>
-                                
-                                <div class="space-y-3">
-                                    <p class="text-gray-300">Используй готовые скрипты (см. раздел «Скрипты продаж»).</p>
-                                    
-                                    <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
-                                        <p class="text-red-400 font-semibold text-sm"><i class="fas fa-exclamation-triangle mr-1"></i> Не спамь!</p>
-                                        <p class="text-sm text-gray-400">Подставь имя компании, сделай комплимент их бизнесу.</p>
-                                    </div>
-                                    
-                                    <div class="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-                                        <p class="text-green-400 font-semibold text-sm"><i class="fas fa-bullseye mr-1"></i> Твоя цель</p>
-                                        <p class="text-sm text-gray-400"><strong class="text-white">НЕ продать сайт</strong>, а продать <strong class="text-white">интерес</strong>.</p>
-                                    </div>
-                                    
-                                    <div class="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3">
-                                        <p class="text-orange-400 font-semibold text-sm"><i class="fas fa-flag-checkered mr-1"></i> Конечная цель переписки</p>
-                                        <p class="text-sm text-gray-400">Получить <strong class="text-white">«Хорошо, пришлите номер вашего разработчика»</strong> или <strong class="text-white">«Ок, пусть ваш разработчик наберет»</strong>.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Шаг 3 -->
-                            <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
-                                <h4 class="text-lg font-bold text-green-400 mb-3 flex items-center gap-2">
-                                    <span class="bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
-                                    Передача лида
-                                </h4>
-                                
-                                <p class="text-gray-300 mb-4">Как только клиент согласился на созвон или просмотр демо:</p>
-                                
-                                <div class="space-y-3">
-                                    <div class="flex items-start gap-3">
-                                        <span class="text-green-400 font-bold">1.</span>
-                                        <p>Берешь его номер (WhatsApp/Telegram)</p>
-                                    </div>
-                                    <div class="flex items-start gap-3">
-                                        <span class="text-green-400 font-bold">2.</span>
-                                        <p>Пишешь мне: <span class="bg-black/40 px-2 py-1 rounded text-sm font-mono">"Имя клиента, Ниша, Ссылка на их соцсеть/карту, Номер телефона (возможно время на которое вы договорились)"</span></p>
-                                    </div>
-                                    <div class="flex items-start gap-3">
-                                        <span class="text-green-400 font-bold">3.</span>
-                                        <div>
-                                            <p class="text-white font-semibold">Всё!</p>
-                                            <p class="text-sm text-gray-400">Дальше я звоню, закрываю сделку, мы получаем деньги → ты получаешь свой %.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Правила -->
-                    <div class="doc-section border-l-red-500">
-                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <span class="text-2xl">⛔</span> Важные правила
-                        </h3>
-
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-5">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <i class="fas fa-tag text-red-400 text-xl"></i>
-                                    <h4 class="font-bold text-white">Не называй цену</h4>
-                                </div>
-                                <p class="text-sm text-gray-400 mb-3">Если спрашивают «Сколько стоит?»</p>
-                                <div class="bg-black/40 rounded-lg p-3 font-mono text-sm border-l-2 border-red-500">
-                                    <p>"Это зависит от функционала. Лучше обсудить с разработчиком, он технарь, скажет точнее. Но напоминаю — платить сразу не нужно"</p>
-                                </div>
-                            </div>
-
-                            <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-5">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <i class="fas fa-handshake text-orange-400 text-xl"></i>
-                                    <h4 class="font-bold text-white">Не груби</h4>
-                                </div>
-                                <p class="text-sm text-gray-400">Мы — <strong class="text-white">премиальный бренд Vižon</strong>. Общаемся вежливо, даже если отказывают.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Финал -->
-                    <div class="bg-gradient-to-r from-green-500/20 to-orange-500/20 border border-white/10 rounded-2xl p-8 text-center">
-                        <p class="text-3xl mb-2">🎯</p>
-                        <h3 class="text-2xl font-bold text-white mb-2">Удачи в охоте!</h3>
-                        <p class="text-gray-400">Ты — лицо Vižon. Каждый клиент — это твой будущий процент.</p>
-                    </div>
-
-                </div>
-            </div>
+        <!-- Активный скрипт -->
+        <div id="activeScript" class="hidden mt-4">
+            <!-- Заполняется JS -->
         </div>
 
     </main>
 
-    <!-- Toast -->
-    <div id="copyToast" class="copy-toast">
-        <i class="fas fa-check-circle mr-2"></i> Скопировано в буфер обмена!
-    </div>
-
-    <!-- Модальное окно статистики -->
-    <div id="statsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass rounded-2xl p-6 max-w-md w-full border border-orange-500/20">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-white">Статистика базы</h3>
-                <button onclick="closeStats()" class="text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
-            </div>
-            <div class="space-y-3">
-                <div class="flex justify-between py-2 border-b border-white/5">
-                    <span class="text-gray-400">Всего записей</span>
-                    <span class="text-orange-400 font-bold" id="totalRecords">17</span>
-                </div>
-                <div class="flex justify-between py-2 border-b border-white/5">
-                    <span class="text-gray-400">Сценарии звонков</span>
-                    <span class="text-white font-medium">6</span>
-                </div>
-                <div class="flex justify-between py-2 border-b border-white/5">
-                    <span class="text-gray-400">Скрипты продаж</span>
-                    <span class="text-white font-medium">8</span>
-                </div>
-                <div class="flex justify-between py-2 border-b border-white/5">
-                    <span class="text-gray-400">Инструкции</span>
-                    <span class="text-white font-medium">3</span>
-                </div>
-                <div class="flex justify-between py-2">
-                    <span class="text-gray-400">Языки</span>
-                    <span class="text-white font-medium">🇷🇺 🇱🇻 🇬🇧</span>
-                </div>
-            </div>
-        </div>
+    <!-- Быстрые действия -->
+    <div class="quick-actions">
+        <button class="fab-btn" onclick="toggleFavorites()" title="Избранное">
+            <i class="fas fa-star"></i>
+        </button>
+        <button class="fab-btn urgent" onclick="panicMode()" title="SOS - срочная помощь">
+            <i class="fas fa-ambulance"></i>
+        </button>
     </div>
 
     <script>
-        // ==========================================
-        // БАЗА ЗНАНИЙ (для поиска)
-        // ==========================================
-        
-        const knowledgeBase = [
-            // Сценарии
-            { id: 1, category: 'scripts', lang: 'ru', title: 'Сценарий: Пиццерия / Доставка еды / Ресторан', content: 'Алло, это {Название}? Привет. Слушайте, я звоню не заказ сделать, у меня вопрос по сотрудничеству. Я хотел бы вам заказы передавать, но не могу найти с кем обсудить. Управляющий или владелец сейчас на месте? Мы занимаемся цифровизацией общепита. У нас есть предложение, как вам онлайн-заказы наладить, чтобы они не терялись. Это не реклама, мы по постоплате работаем.', tags: ['пиццерия', 'ресторан', 'доставка', 'общепит', 'официант', 'постоплата'] },
-            { id: 2, category: 'scripts', lang: 'ru', title: 'Сценарий: Автосервис / Детейлинг / СТО', content: 'Алло, {Название}? Ремонтом занимаетесь? Отлично. Смотрите, я хочу вам клиентов подгонять на ремонт/услуги. Нашел вас на картах, вижу вы толковые ребята. С кем можно перетереть насчет партнерства? Vižon. Мы делаем сайты, которые генерируют заявки. Хочу предложить владельцу сделать нормальный сайт бесплатно по постоплате.', tags: ['автосервис', 'детейлинг', 'СТО', 'ремонт', 'партнерство', 'vižon'] },
-            { id: 3, category: 'scripts', lang: 'ru', title: 'Сценарий: Салон красоты / Барбершоп / Клиника', content: 'Добрый день, салон {Название}? Девушка, подскажите, а как с владелицей или управляющей связаться? У меня предложение по маркетингу, хотим ваш салон бесплатно прорекламировать через новый сайт. Мы работаем без предоплаты. Директор ничего не теряет, а вы можете получить больше клиентов и чаевых.', tags: ['салон', 'красота', 'барбершоп', 'клиника', 'администратор', 'маркетинг'] },
-            { id: 4, category: 'scripts', lang: 'ru', title: 'Сценарий: Юристы / Бухгалтеры / Офисы', content: 'Добрый день. Соедините с генеральным директором, пожалуйста. По вопросу интернет-присутствия вашей компании. Я вижу у вас проблемы с индексацией сайта, вы теряете клиентов. У меня поручение от руководителя студии Vižon связаться с вашим директором лично. Мы работаем по факту выполненных работ.', tags: ['юристы', 'бухгалтеры', 'офис', 'секретарь', 'vižon', 'директор'] },
-            { id: 5, category: 'scripts', lang: 'ru', title: 'Главные отмазки (как их обходить)', content: 'Нам ничего не нужно - Я вас понял. Но я не продаю ничего. Мы предлагаем сделать сайт, вы смотрите. Если нравится - берете. Пришлите на почту - Конечно пришлю. Но почту никто не читает. Дайте номер. Директора нет - Дайте его мобильный, я ему смс скину. У нас есть Инстаграм - Инстаграм это как съемная квартира, а сайт - собственность. Денег нет - Мы работаем по постоплате.', tags: ['возражения', 'отмазки', 'ответы', 'работа с возражениями', 'постоплата'] },
-            { id: 6, category: 'scripts', lang: 'ru', title: 'Психологическая установка', content: 'Ты не просишь, ты предлагаешь. Ты идешь к ним с чемоданом денег (клиентов), а не с протянутой рукой. Голос решает. Говори медленно, уверенно и низким голосом. Волшебное слово ПОСТОПЛАТА. Это твой таран.', tags: ['психология', 'голос', 'постоплата', 'продавливание', 'навыки'] },
+        // База знаний - оптимизированная для скорости
+        const scripts = {
+            // Еда
+            food1: {
+                title: "🍕 Пиццерия / Ресторан",
+                goal: "Взять номер владельца/управляющего",
+                time: "2-3 мин",
+                dialogue: [
+                    { speaker: "manager", text: "Алло, это {Название}?" },
+                    { speaker: "client", text: "Да, здравствуйте." },
+                    { speaker: "manager", text: "Привет. Я звоню не по заказу, у меня вопрос по сотрудничеству. Я хотел бы вам заказы передавать, но не могу найти с кем обсудить. <span class='key-phrase'>Управляющий или владелец сейчас на месте?</span>" },
+                    { speaker: "client", text: "А по какому вопросу?" },
+                    { speaker: "manager", text: "Мы занимаемся цифровизацией общепита. У нас есть предложение, как вам онлайн-заказы наладить, чтобы они не терялись. <span class='power-word'>Это не реклама, мы по постоплате работаем.</span> Скиньте номер главного?" }
+                ],
+                tags: ["еда", "ресторан", "доставка"]
+            },
             
-            // Скрипты продаж
-            { id: 7, category: 'sales', lang: 'ru', title: 'Email: Сайт есть, но устарел (Холодное письмо)', content: 'Тема: Идея редизайна для {Название_Компании} (оплата по факту). Здравствуйте! Пишу вам, так как увидел ваш бизнес. Честно говоря, ваш сайт немного отстает от качества сервиса. Мы команда разработчиков, делаем полный редизайн. Живой дизайн с анимацией. Работаем по постоплате. Рисков для вас - ноль.', tags: ['email', 'холодное письмо', 'редизайн', 'постоплата', 'сайт устарел'] },
-            { id: 8, category: 'sales', lang: 'ru', title: 'DM: Соцсети (Сайт есть, но устарел)', content: 'Привет! У вас крутой контент в профиле, но сайт кажется устаревшим. Мы специализируемся на редизайне. Работаем без предоплаты. Сначала делаем - вы смотрите. Если нравится - платите.', tags: ['dm', 'директ', 'соцсети', 'instagram', 'редизайн', 'живой дизайн'] },
-            { id: 9, category: 'sales', lang: 'ru', title: 'Email: Сайта нет (Холодное письмо)', content: 'Тема: Сайт для {Название_Компании} (без предоплаты). Нашел вашу компанию в картах. Отличная репутация, но нет сайта. Клиенты сначала гуглят. Если не находят сайт - уходят к конкурентам. Вы теряете теплых клиентов каждый день. Vižon создает премиальный живой дизайн. Работаем строго по постоплате.', tags: ['email', 'холодное письмо', 'сайта нет', 'постоплата', 'vižon', 'премия'] },
-            { id: 10, category: 'sales', lang: 'ru', title: 'DM: Соцсети (Сайта нет)', content: 'Здравствуйте! У вас отличный рейтинг, но нет сайта. В 2026 году это потеря клиентов. Мы - студия Vižon. Делаем премиальные сайты с живым дизайном. Работаем без предоплаты. Сначала делаем - вы смотрите - если нравится, платите.', tags: ['dm', 'директ', 'сайта нет', '2026', 'vižon', 'живой дизайн'] },
-            { id: 11, category: 'sales', lang: 'lv', title: 'Latviešu: Email (Сайт устарел)', content: 'Labdien! Redizaina ideja uzņēmumam. Mājaslapa ir novecojusi. Mēs nodarbojamies ar pilnu redizainu. Dzīvais dizains. Strādājam ar pēcapmaksu. Risku nav.', tags: ['latviešu', 'латвийский', 'lv', 'redizains', 'pēcapmaksa'] },
-            { id: 12, category: 'sales', lang: 'lv', title: 'Latviešu: Email (Сайта нет)', content: 'Labdien! Mājaslapa uzņēmumam. Nav mājaslapas. Klienti googlē. Zaudējat klientus. Vižon. Premium dzīvais dizains. Strādājam ar pēcapmaksu.', tags: ['latviešu', 'латвийский', 'lv', 'pēcapmaksa', 'nav mājaslapas'] },
-            { id: 13, category: 'sales', lang: 'en', title: 'English: Email (Site outdated)', content: 'Subject: Redesign concept for {Company_Name} (Payment upon satisfaction). Hello! I saw your business. Your website lags behind your service quality. We specialize in full redesigns. Live design with animation. We work on post-payment basis. Zero risk for you.', tags: ['english', 'английский', 'en', 'redesign', 'post-payment'] },
-            { id: 14, category: 'sales', lang: 'en', title: 'English: Email (No website)', content: 'Subject: Website for {Company_Name} (No prepayment). Found your company in maps. Excellent reputation but no website. Clients Google first. Without website you lose warm clients every day. Vižon creates premium live design. Strictly post-payment.', tags: ['english', 'английский', 'en', 'no website', 'post-payment', 'vižon'] },
-            
-            // Onboarding
-            { id: 15, category: 'onboarding', lang: 'ru', title: 'Гайд для партнера Vižon', content: 'Добро пожаловать в команду! Мы занимаемся премиальной веб-разработкой. Твоя задача - находить клиентов и передавать их мне. Твой заработок - процент от каждого закрытого проекта. Продавать нас легко, у нас есть чит-код.', tags: ['лидогенератор', 'партнер', 'начало', 'заработок', 'процент'] },
-            { id: 16, category: 'onboarding', lang: 'ru', title: 'Что мы продаем?', content: 'Мы не делаем дешевые шаблоны. Мы делаем Vižon - это живой дизайн, анимация, стиль и смыслы. Наши сайты выглядят дорого и реально продают. Целевая аудитория: локальный бизнес у которых нет сайта или он очень старый.', tags: ['продукт', 'vižon', 'живой дизайн', 'целевая аудитория', 'локальный бизнес'] },
-            { id: 17, category: 'onboarding', lang: 'ru', title: 'Твой главный козырь (Чит-код)', content: 'Обычно клиенты боятся: Заплачу деньги, а сделают фигню. Мы работаем ПО ПОСТОПЛАТЕ. Это твой главный аргумент. Ты говоришь: Мы сделаем сайт, вы увидите результат. Если понравится - оплачиваете. Если нет - расходимся. Рисков ноль. От такого предложения очень сложно отказаться.', tags: ['чит-код', 'постоплата', 'козырь', 'аргумент', 'риски'] }
-        ];
+            // Авто
+            auto1: {
+                title: "🚗 Автосервис / СТО",
+                goal: "Зайти через 'хочу дать работу'",
+                time: "2-3 мин",
+                dialogue: [
+                    { speaker: "manager", text: "Алло, {Название}? Ремонтом занимаетесь?" },
+                    { speaker: "client", text: "Да." },
+                    { speaker: "manager", text: "Отлично. <span class='key-phrase'>Я хочу вам клиентов подгонять на ремонт.</span> Нашел вас на картах, вижу вы толковые. С кем можно перетереть насчет партнерства?" },
+                    { speaker: "client", text: "А что за клиенты?" },
+                    { speaker: "manager", text: "Я из студии Vižon. Мы делаем сайты, которые генерируют заявки. <span class='power-word'>Хочу предложить владельцу сделать сайт бесплатно (по постоплате)</span>, чтобы у вас работы больше было. Дайте его контакт?" }
+                ],
+                tags: ["авто", "сервис", "ремонт"]
+            },
 
-        // ==========================================
-        // НАВИГАЦИЯ ПО ТАБАМ
-        // ==========================================
-        
+            // Салон
+            beauty1: {
+                title: "💅 Салон / Барбершоп",
+                goal: "Пробить админа, взять номер босса",
+                time: "3-4 мин",
+                dialogue: [
+                    { speaker: "manager", text: "Добрый день, салон {Название}?" },
+                    { speaker: "client", text: "Да." },
+                    { speaker: "manager", text: "Девушка, подскажите, а как с владелицей связаться? У меня предложение по маркетингу, хотим ваш салон <span class='key-phrase'>бесплатно прорекламировать через новый сайт</span>." },
+                    { speaker: "client", text: "Пишите на почту / Мы не заинтересованы." },
+                    { speaker: "manager", text: "Понимаю вашу работу. Но смотрите, <span class='power-word'>мы работаем без предоплаты</span>. Директор ничего не теряет, а вы можете получить больше клиентов (и чаевых). Я просто хочу передать контакт разработчику, он ей наберет на 2 минуты. Если скажет 'нет' — больше не побеспокоим. Какой у неё номер?" }
+                ],
+                tags: ["салон", "красота", "админ"]
+            },
+
+            // Юристы
+            pro1: {
+                title: "🏢 Юристы / Бухгалтеры",
+                goal: "Пройти секретаря",
+                time: "3-4 мин",
+                dialogue: [
+                    { speaker: "manager", text: "Добрый день. <span class='key-phrase'>Соедините с генеральным директором, пожалуйста.</span>" },
+                    { speaker: "client", text: "По какому вопросу?" },
+                    { speaker: "manager", text: "По вопросу интернет-присутствия вашей компании. Я вижу у вас проблемы с индексацией сайта, вы теряете клиентов. У меня поручение от руководителя студии Vižon связаться с директором лично." },
+                    { speaker: "client", text: "Пришлите КП на почту." },
+                    { speaker: "manager", text: "Я пришлю, но вопрос срочный. Давайте так: вы мне дадите его прямой номер или почту, я ему напишу, что это от Vižon. <span class='power-word'>Мы работаем по факту выполненных работ</span>, так что директору это будет интересно." }
+                ],
+                tags: ["офис", "секретарь", "профессионалы"]
+            },
+
+            // ВОЗРАЖЕНИЯ
+            obj1: {
+                title: "🛑 «Нам не нужно / У нас всё есть»",
+                type: "antwort",
+                text: "<span class='power-word'>Я вас понял. Но я не продаю ничего.</span> Мы предлагаем сделать сайт, вы смотрите. Если нравится — берете. Вы вообще ничем не рискуете. Дайте просто номер директора, он сам решит, нужна ему халява или нет.",
+                accent: "НЕ просим — предлагаем"
+            },
+
+            obj3: {
+                title: "📧 «Пришлите на почту»",
+                type: "antwort",
+                text: "<span class='power-word'>Конечно пришлю. Но почту никто не читает.</span> Давайте я лучше вашему главному в Вотсап/Телеграм напишу коротко? Продиктуйте номер.",
+                accent: "Срочность + альтернатива"
+            },
+
+            obj4: {
+                title: "👤 «Директора нет»",
+                type: "antwort",
+                text: "<span class='power-word'>Окей. А когда будет?</span> Или дайте его мобильный, я ему смс скину, он сам перезвонит, когда освободится.",
+                accent: "Не отступаем — уточняем"
+            },
+
+            money1: {
+                title: "💰 «Денег нет»",
+                type: "antwort",
+                text: "<span class='power-word'>Так я поэтому и звоню!</span> Я же не прошу денег сейчас. Мы работаем по постоплате. Вы платите, когда у вас уже будет готовый инструмент, который начнет приносить деньги. Это идеальный вариант для 'не сезона'.",
+                accent: "Постоплата — решение"
+            },
+
+            money3: {
+                title: "🏷️ «Сколько стоит?»",
+                type: "antwort",
+                text: "<span class='power-word'>Это зависит от функционала.</span> Лучше обсудить с разработчиком, он технарь, скажет точнее. Но напоминаю — платить сразу не нужно.",
+                accent: "Не называем цену!"
+            },
+
+            comp1: {
+                title: "📱 «У нас есть Инстаграм»",
+                type: "antwort",
+                text: "<span class='power-word'>Согласен, у вас крутой Инстаграм!</span> Но Инстаграм — это как съемная квартира: сегодня он есть, завтра теневой бан или блокировка. А сайт — это ваша собственность. Плюс, люди ищут 'пиццу/стрижку' в Гугле, а не в Инсте. Вы теряете этих клиентов.",
+                accent: "Сайт = собственность"
+            },
+
+            // ПСИХОЛОГИЯ
+            psy1: {
+                title: "🔑 Чит-код: ПОСТОПЛАТА",
+                type: "psychology",
+                text: "Волшебное слово <span class='power-word'>ПОСТОПЛАТА</span>. Это твой таран. Используй в каждом втором предложении, если клиент сопротивляется.",
+                rule: "Говори медленно, уверенно, низким голосом. Ты идешь с чемоданом денег (клиентов), а не с протянутой рукой."
+            },
+
+            // EMAIL
+            email1: {
+                title: "📧 Email: Редизайн (сайт есть)",
+                type: "email",
+                template: `Тема: Идея редизайна для {Название} (оплата по факту)
+
+Здравствуйте!
+
+Пишу, так как увидел ваш бизнес. Честно — сайт немного отстает от качества сервиса. Сейчас он выглядит статичным и сложным для клиента (особенно с телефона).
+
+Мы делаем «живой дизайн» — понятный, с анимацией, который ведет клиента к покупке.
+
+<span class="power-word">Работаем по постоплате:</span>
+• Разрабатываем концепт — показываем
+• Вы платите только если нравится
+• Рисков ноль
+
+Мой разработчик готов созвониться на 5-10 мин, показать примеры.
+
+Когда удобно?
+
+{Имя}`,
+                tags: ["email", "редизайн"]
+            },
+
+            email2: {
+                title: "📧 Email: Новый сайт (нет сайта)",
+                type: "email",
+                template: `Тема: Сайт для {Название} (без предоплаты)
+
+Здравствуйте!
+
+Нашел вас в картах. Отличная репутация, но нет сайта. Клиенты сначала «гуглят» — если не находят, уходят к конкурентам. Вы теряете теплых клиентов каждый день.
+
+<span class="power-word">Vižon работает иначе:</span>
+• Делаем сайт — показываем результат
+• Видите реальный продукт
+• Оплачиваете только если устраивает
+• Рисков — 0
+
+5-10 минут на созвон — найдется время?
+
+{Имя}`,
+                tags: ["email", "новый сайт"]
+            }
+        };
+
+        // Горячие клавиши
+        document.addEventListener('keydown', (e) => {
+            // Поиск по /
+            if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+            
+            // Сброс по ESC
+            if (e.key === 'Escape') {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('searchResults').classList.add('hidden');
+                document.getElementById('activeScript').classList.add('hidden');
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('hidden'));
+            }
+            
+            // Табы 1-2-3
+            if (e.key >= '1' && e.key <= '3') {
+                const tabs = ['scenarios', 'objections', 'scripts'];
+                const idx = parseInt(e.key) - 1;
+                if (tabs[idx]) {
+                    const btn = document.querySelector(`[onclick="switchTab('${tabs[idx]}', this)"]`);
+                    if (btn) switchTab(tabs[idx], btn);
+                }
+            }
+        });
+
         function switchTab(tabName, btn) {
-            // Скрываем все табы
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
             
-            // Убираем активность с кнопок
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            
-            // Показываем нужный таб
-            document.getElementById('tab-' + tabName).classList.add('active');
-            
-            // Активируем кнопку
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            // Если это поиск, фокусируемся на поле
-            if (tabName === 'search') {
-                setTimeout(() => {
-                    document.getElementById('searchInput').focus();
-                }, 100);
-            }
+            // Скрываем результаты поиска
+            document.getElementById('searchResults').classList.add('hidden');
+            document.getElementById('activeScript').classList.add('hidden');
         }
 
-        // ==========================================
-        // ПОИСК
-        // ==========================================
-        
-        let currentCategory = 'all';
-        let currentLang = 'all';
-
-        function performSearch(query) {
-            const container = document.getElementById('resultsContainer');
-            
+        function instantSearch(query) {
             if (!query.trim()) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-search text-6xl mb-4 text-neutral-800"></i>
-                        <h3 class="text-xl font-semibold text-gray-400 mb-2">Начните поиск</h3>
-                        <p class="text-gray-600 max-w-md mx-auto">Введите ключевые слова или выберите быстрый поиск выше</p>
-                    </div>
-                `;
+                document.getElementById('searchResults').classList.add('hidden');
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('hidden'));
                 return;
             }
             
-            const lowerQuery = query.toLowerCase();
-            const terms = lowerQuery.split(/\s+/).filter(t => t.length > 2);
+            const lower = query.toLowerCase();
+            const results = [];
             
-            const results = knowledgeBase.filter(item => {
-                // Фильтр по категории
-                if (currentCategory !== 'all' && item.category !== currentCategory) {
-                    return false;
+            for (const [key, script] of Object.entries(scripts)) {
+                const text = (script.title + ' ' + (script.tags?.join(' ') || '') + ' ' + (script.text || '') + ' ' + (script.template || '')).toLowerCase();
+                if (text.includes(lower)) {
+                    results.push({ key, ...script });
                 }
-                
-                // Фильтр по языку
-                if (currentLang !== 'all' && item.lang !== currentLang) {
-                    return false;
-                }
-                
-                const searchText = `${item.title} ${item.content} ${item.tags.join(' ')}`.toLowerCase();
-                
-                if (searchText.includes(lowerQuery)) return true;
-                
-                return terms.some(term => 
-                    searchText.includes(term) || 
-                    item.tags.some(tag => tag.includes(term))
-                );
-            });
+            }
             
-            renderResults(results, query);
+            renderResults(results);
         }
 
-        function renderResults(results, query) {
-            const container = document.getElementById('resultsContainer');
+        function renderResults(results) {
+            const container = document.getElementById('searchResults');
+            const tabs = document.querySelectorAll('.tab-content');
             
             if (results.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-inbox text-6xl mb-4 text-neutral-800"></i>
-                        <h3 class="text-xl font-semibold text-gray-400 mb-2">Ничего не найдено</h3>
-                        <p class="text-gray-600 max-w-md mx-auto">Попробуйте другие ключевые слова или сбросьте фильтры языка</p>
-                    </div>
-                `;
+                container.innerHTML = '<div class="p-8 text-center text-gray-500">Ничего не найдено. Попробуй: "постоплата", "не нужно", "почта"</div>';
+                container.classList.remove('hidden');
+                tabs.forEach(t => t.classList.add('hidden'));
                 return;
             }
             
-            container.innerHTML = results.map(item => `
-                <div class="result-card glass rounded-xl p-6 ${item.category === 'scripts' ? 'border-l-orange-500' : item.category === 'sales' ? 'border-l-blue-500' : 'border-l-green-500'}">
-                    <div class="flex justify-between items-start mb-3">
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl">${getLangFlag(item.lang)}</span>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getCategoryColor(item.category)}">
-                                ${getCategoryName(item.category)}
-                            </span>
-                        </div>
-                        <button onclick="copyToClipboard('${item.id}')" class="text-gray-400 hover:text-orange-400 transition-colors p-2" title="Копировать">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                    
-                    <h3 class="text-lg font-bold text-white mb-2">${highlightText(item.title, query)}</h3>
-                    
-                    <div class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                        ${highlightText(item.content, query)}
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2">
-                        ${item.tags.map(tag => `
-                            <span class="px-2 py-1 bg-white/5 rounded text-xs text-gray-500 hover:bg-orange-500/20 hover:text-orange-300 cursor-pointer transition-colors" onclick="quickSearch('${tag}')">
-                                #${tag}
-                            </span>
-                        `).join('')}
+            container.innerHTML = results.map(r => `
+                <div class="script-card cursor-pointer" onclick="openScript('${r.key}')">
+                    <div class="script-header">
+                        <div class="script-title">${r.title}</div>
+                        <i class="fas fa-chevron-right text-gray-500"></i>
                     </div>
                 </div>
             `).join('');
-        }
-
-        function getLangFlag(lang) {
-            const flags = { ru: '🇷🇺', lv: '🇱🇻', en: '🇬🇧' };
-            return flags[lang] || '🌍';
-        }
-
-        function highlightText(text, query) {
-            if (!query) return text;
-            const terms = query.split(/\s+/).filter(t => t.length > 2);
-            let result = text;
-            const allTerms = [query, ...terms].filter((v, i, a) => a.indexOf(v) === i);
             
-            allTerms.forEach(term => {
-                const regex = new RegExp(`(${escapeRegex(term)})`, 'gi');
-                result = result.replace(regex, '<span class="highlight">$1</span>');
-            });
+            container.classList.remove('hidden');
+            tabs.forEach(t => t.classList.add('hidden'));
+        }
+
+        function openScript(key) {
+            const script = scripts[key];
+            if (!script) return;
             
-            return result;
-        }
-
-        function escapeRegex(string) {
-            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        }
-
-        function getCategoryColor(cat) {
-            const colors = {
-                scripts: 'bg-orange-500/20 text-orange-300',
-                sales: 'bg-blue-500/20 text-blue-300',
-                onboarding: 'bg-green-500/20 text-green-300'
-            };
-            return colors[cat] || 'bg-gray-500/20 text-gray-300';
-        }
-
-        function getCategoryName(cat) {
-            const names = { scripts: 'Сценарии', sales: 'Продажи', onboarding: 'Обучение' };
-            return names[cat] || cat;
-        }
-
-        function filterCategory(category, btn) {
-            currentCategory = category;
-            document.querySelectorAll('.category-badge').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const query = document.getElementById('searchInput').value;
-            if (query) performSearch(query);
-        }
-
-        function filterByLang(lang, btn) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-badge').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const query = document.getElementById('searchInput').value;
-            if (query) performSearch(query);
-        }
-
-        function quickSearch(term) {
-            document.getElementById('searchInput').value = term;
-            performSearch(term);
-            // Переключаемся на вкладку поиска
-            const searchTabBtn = document.querySelector('button[onclick*="search"]');
-            if (searchTabBtn) switchTab('search', searchTabBtn);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function copyToClipboard(id) {
-            const item = knowledgeBase.find(i => i.id == id);
-            if (!item) return;
+            const container = document.getElementById('activeScript');
             
-            const textToCopy = `${item.title}\n\n${item.content}\n\nТеги: ${item.tags.join(', ')}`;
+            let content = '';
             
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast();
-            });
-        }
-
-        function copyDoc(elementId) {
-            const element = document.getElementById(elementId);
-            if (!element) return;
+            if (script.dialogue) {
+                // Диалоговый формат
+                content = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-white mb-1">${script.title}</h2>
+                            <div class="flex gap-3 text-sm">
+                                <span class="text-orange-400"><i class="fas fa-bullseye mr-1"></i>${script.goal}</span>
+                                <span class="text-gray-500"><i class="fas fa-clock mr-1"></i>${script.time}</span>
+                            </div>
+                        </div>
+                        <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        ${script.dialogue.map(line => `
+                            <div class="dialogue-line">
+                                <span class="dialogue-speaker ${line.speaker}">${line.speaker === 'manager' ? 'Ты:' : 'Клиент:'}</span>
+                                <span class="dialogue-text">${line.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                        <span class="text-green-400 text-sm font-semibold"><i class="fas fa-lightbulb mr-1"></i>Ключевой момент:</span>
+                        <span class="text-gray-400 text-sm ml-1">Говори уверенно, низким голосом. Это партнерство, не продажа.</span>
+                    </div>
+                `;
+            } else if (script.type === 'antwort') {
+                // Ответ на возражение
+                content = `
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-bold text-white">${script.title}</h2>
+                        <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="dialogue-block">
+                        <p class="text-lg leading-relaxed">${script.text}</p>
+                    </div>
+                    
+                    <div class="mt-4 flex items-center gap-2">
+                        <span class="text-orange-400 text-sm font-semibold">Акцент:</span>
+                        <span class="text-gray-300 text-sm">${script.accent}</span>
+                    </div>
+                `;
+            } else if (script.type === 'email') {
+                // Email шаблон
+                content = `
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-bold text-white">${script.title}</h2>
+                        <div class="flex gap-2">
+                            <button onclick="copyToClipboard('${key}')" class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded text-sm hover:bg-orange-500/30">
+                                <i class="fas fa-copy mr-1"></i>Копировать
+                            </button>
+                            <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-black/50 rounded-lg p-4 font-mono text-sm whitespace-pre-line text-gray-300 border border-white/10">
+                        ${script.template}
+                    </div>
+                `;
+            } else {
+                // Простой текст
+                content = `
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-bold text-white">${script.title}</h2>
+                        <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="text-gray-300 leading-relaxed">${script.text || script.rule || ''}</div>
+                `;
+            }
             
-            const text = element.innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                showToast();
-            });
+            container.innerHTML = `<div class="glass rounded-xl p-6 border border-orange-500/30">${content}</div>`;
+            container.classList.remove('hidden');
+            
+            // Скрываем остальное
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.getElementById('searchResults').classList.add('hidden');
+            
+            // Скролл к скрипту
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function showToast() {
-            const toast = document.getElementById('copyToast');
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2000);
+        function closeScript() {
+            document.getElementById('activeScript').classList.add('hidden');
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('hidden'));
         }
 
-        function showStats() {
-            document.getElementById('statsModal').classList.remove('hidden');
+        function copyToClipboard(key) {
+            const script = scripts[key];
+            if (!script || !script.template) return;
+            
+            navigator.clipboard.writeText(script.template.replace(/<[^>]+>/g, ''));
+            
+            // Визуальный фидбек
+            const btn = event.target.closest('button');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check mr-1"></i>Скопировано!';
+            btn.classList.add('bg-green-500/20', 'text-green-400');
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.classList.remove('bg-green-500/20', 'text-green-400');
+            }, 1500);
         }
 
-        function closeStats() {
-            document.getElementById('statsModal').classList.add('hidden');
+        function panicMode() {
+            // SOS - показываем самые критичные возражения
+            switchTab('objections', document.querySelectorAll('.nav-tab')[1]);
+            document.getElementById('searchInput').value = '';
+            document.getElementById('activeScript').classList.add('hidden');
+            
+            // Визуальный фидбек
+            const btn = event.target.closest('.fab-btn');
+            btn.style.transform = 'scale(0.9)';
+            setTimeout(() => btn.style.transform = '', 100);
         }
 
-        document.getElementById('statsModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeStats();
-        });
+        function toggleFavorites() {
+            // TODO: избранное
+            alert('Избранное: в разработке');
+        }
 
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', () => {
-            // Показываем все записи
-            performSearch('');
+        // Фокус на поиск при загрузке
+        window.addEventListener('load', () => {
+            document.getElementById('searchInput').focus();
         });
     </script>
 </body>
