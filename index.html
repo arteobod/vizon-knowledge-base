@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Inter', sans-serif; }
-        
+
         :root {
             --vizon-orange: #f97316;
             --vizon-dark: #0a0a0a;
@@ -17,38 +17,36 @@
             --stress-red: #ef4444;
             --success-green: #22c55e;
         }
-        
+
         body {
             background: var(--vizon-dark);
             color: #f5f5f5;
             min-height: 100vh;
         }
-        
+
         .vizon-gradient {
             background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%);
         }
-        
+
         .glass {
             background: rgba(23, 23, 23, 0.95);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.05);
         }
-        
-        /* Мгновенный поиск - главный элемент */
+
         .instant-search {
             background: #0f0f0f;
             border: 2px solid #333;
             transition: all 0.15s ease;
             font-size: 18px;
         }
-        
+
         .instant-search:focus {
             border-color: #f97316;
             box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
             background: #000;
         }
-        
-        /* Горячие клавиши */
+
         .hotkey {
             background: rgba(255,255,255,0.1);
             padding: 2px 8px;
@@ -58,8 +56,7 @@
             color: #888;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        
-        /* Сценарные группы - логическая навигация */
+
         .scenario-group {
             background: rgba(249, 115, 22, 0.05);
             border: 1px solid rgba(249, 115, 22, 0.15);
@@ -67,7 +64,7 @@
             padding: 16px;
             margin-bottom: 12px;
         }
-        
+
         .scenario-group-header {
             display: flex;
             align-items: center;
@@ -76,7 +73,7 @@
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(249, 115, 22, 0.1);
         }
-        
+
         .scenario-group-title {
             font-weight: 700;
             color: #fb923c;
@@ -84,8 +81,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
-        /* Быстрые триггеры - только критичные */
+
         .trigger-btn {
             display: inline-flex;
             align-items: center;
@@ -101,36 +97,35 @@
             margin: 4px;
             font-weight: 500;
         }
-        
+
         .trigger-btn:hover {
             background: rgba(249, 115, 22, 0.15);
             border-color: rgba(249, 115, 22, 0.4);
             color: #fff;
             transform: translateY(-1px);
         }
-        
+
         .trigger-btn:active {
             transform: scale(0.98);
         }
-        
+
         .trigger-btn.stress {
             background: rgba(239, 68, 68, 0.1);
             border-color: rgba(239, 68, 68, 0.3);
             color: #fca5a5;
         }
-        
+
         .trigger-btn.stress:hover {
             background: rgba(239, 68, 68, 0.2);
             border-color: #ef4444;
         }
-        
+
         .trigger-btn.success {
             background: rgba(34, 197, 94, 0.1);
             border-color: rgba(34, 197, 94, 0.3);
             color: #86efac;
         }
-        
-        /* Карточка скрипта - читаемость по диагонали */
+
         .script-card {
             background: #111;
             border: 1px solid #222;
@@ -139,17 +134,12 @@
             transition: all 0.2s;
             margin-bottom: 12px;
         }
-        
+
         .script-card:hover {
             border-color: #f97316;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-        
-        .script-card.expanded {
-            border-color: #f97316;
-            box-shadow: 0 0 0 1px #f97316;
-        }
-        
+
         .script-header {
             padding: 16px 20px;
             cursor: pointer;
@@ -158,7 +148,7 @@
             align-items: center;
             background: linear-gradient(90deg, rgba(249,115,22,0.05) 0%, transparent 100%);
         }
-        
+
         .script-title {
             font-weight: 700;
             font-size: 16px;
@@ -167,35 +157,141 @@
             align-items: center;
             gap: 10px;
         }
-        
-        .script-badges {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .script-badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .script-content {
-            max-height: 0;
+
+        /* Многоязычная карточка */
+        .trilingual-card {
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 12px;
             overflow: hidden;
-            transition: max-height 0.3s ease;
         }
-        
-        .script-card.expanded .script-content {
-            max-height: 2000px;
+
+        .trilingual-header {
+            background: linear-gradient(90deg, rgba(249,115,22,0.1) 0%, rgba(249,115,22,0.05) 100%);
+            padding: 16px 20px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .script-body {
-            padding: 0 20px 20px;
+
+        .trilingual-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
         }
-        
-        /* Форматирование диалога - сканируемость */
+
+        .close-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+        }
+
+        .lang-tabs {
+            display: flex;
+            background: #0a0a0a;
+            border-bottom: 1px solid #333;
+        }
+
+        .lang-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .lang-tab:hover {
+            color: #999;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .lang-tab.active {
+            color: #f97316;
+            border-bottom-color: #f97316;
+            background: rgba(249,115,22,0.05);
+        }
+
+        .lang-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        .phrase-block {
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid #f97316;
+        }
+
+        .phrase-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .phrase-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e5e5e5;
+        }
+
+        .key-highlight {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .accent-block {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 8px;
+        }
+
+        .accent-label {
+            color: #f97316;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .accent-text {
+            color: #d4d4d4;
+            font-size: 14px;
+        }
+
         .dialogue-block {
             background: #0a0a0a;
             border-radius: 8px;
@@ -203,32 +299,31 @@
             margin: 12px 0;
             border-left: 3px solid #f97316;
         }
-        
+
         .dialogue-line {
             margin: 8px 0;
             line-height: 1.6;
             font-size: 15px;
         }
-        
+
         .dialogue-speaker {
             font-weight: 700;
             display: inline-block;
             min-width: 100px;
         }
-        
+
         .dialogue-speaker.manager {
             color: #22c55e;
         }
-        
+
         .dialogue-speaker.client {
             color: #ef4444;
         }
-        
+
         .dialogue-text {
             color: #d4d4d4;
         }
-        
-        /* Ключевые фразы - выделение */
+
         .key-phrase {
             background: rgba(249, 115, 22, 0.2);
             color: #fb923c;
@@ -237,7 +332,7 @@
             font-weight: 600;
             border: 1px solid rgba(249, 115, 22, 0.3);
         }
-        
+
         .power-word {
             background: rgba(34, 197, 94, 0.15);
             color: #4ade80;
@@ -246,8 +341,7 @@
             font-weight: 700;
             border: 1px solid rgba(34, 197, 94, 0.3);
         }
-        
-        /* Быстрые действия */
+
         .quick-actions {
             position: fixed;
             bottom: 20px;
@@ -256,7 +350,7 @@
             gap: 10px;
             z-index: 100;
         }
-        
+
         .fab-btn {
             width: 56px;
             height: 56px;
@@ -272,24 +366,12 @@
             box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
             transition: all 0.2s;
         }
-        
+
         .fab-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 30px rgba(249, 115, 22, 0.6);
         }
-        
-        /* Избранное */
-        .fav-btn {
-            color: #666;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        
-        .fav-btn.active {
-            color: #fbbf24;
-        }
-        
-        /* Табы упрощенные */
+
         .nav-tabs {
             display: flex;
             gap: 4px;
@@ -297,7 +379,7 @@
             padding: 4px;
             border-radius: 12px;
         }
-        
+
         .nav-tab {
             padding: 10px 20px;
             border-radius: 8px;
@@ -310,53 +392,58 @@
             background: transparent;
             white-space: nowrap;
         }
-        
+
         .nav-tab:hover {
             color: #fff;
             background: rgba(255,255,255,0.05);
         }
-        
+
         .nav-tab.active {
             background: #f97316;
             color: #fff;
         }
-        
-        /* Пустое состояние */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #525252;
-        }
-        
-        /* Контрастность для глаз */
-        .high-contrast {
-            background: #000;
-            color: #fff;
-        }
-        
-        /* Скрыть/показать */
+
         .hidden { display: none !important; }
-        
-        /* Анимация */
+
         @keyframes pulse-urgent {
             0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
             50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
         }
-        
+
         .urgent {
             animation: pulse-urgent 2s infinite;
         }
-        
-        /* Скроллбар */
+
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #f97316; }
+
+        .copy-btn {
+            padding: 6px 12px;
+            background: rgba(249, 115, 22, 0.15);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            color: #fb923c;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(249, 115, 22, 0.25);
+        }
+
+        .copy-btn.copied {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #4ade80;
+        }
     </style>
+<base target="_blank">
 </head>
 <body class="antialiased">
 
-    <!-- Шапка - минималистичная -->
     <header class="border-b border-white/5 bg-black/80 sticky top-0 z-50 backdrop-blur-xl">
         <div class="max-w-5xl mx-auto px-4 py-3">
             <div class="flex items-center justify-between mb-3">
@@ -374,8 +461,7 @@
                     <span class="text-xs text-gray-500">сброс</span>
                 </div>
             </div>
-            
-            <!-- Навигация - 3 основных раздела -->
+
             <div class="nav-tabs overflow-x-auto">
                 <button class="nav-tab active" onclick="switchTab('scenarios', this)" data-hotkey="1">
                     <i class="fas fa-phone mr-2"></i>Сценарии <span class="hotkey ml-2">1</span>
@@ -386,14 +472,15 @@
                 <button class="nav-tab" onclick="switchTab('scripts', this)" data-hotkey="3">
                     <i class="fas fa-envelope mr-2"></i>Письма <span class="hotkey ml-2">3</span>
                 </button>
+                <button class="nav-tab" onclick="switchTab('guide', this)" data-hotkey="4">
+                    <i class="fas fa-book mr-2"></i>Гайд <span class="hotkey ml-2">4</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Главной контент -->
     <main class="max-w-5xl mx-auto px-4 py-4">
-        
-        <!-- Мгновенный поиск - всегда виден -->
+
         <div class="mb-4 sticky top-[100px] z-40 bg-[#0a0a0a]/95 backdrop-blur py-2">
             <div class="relative">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
@@ -412,10 +499,9 @@
             </div>
         </div>
 
-        <!-- ВКЛАДКА 1: СЦЕНАРИИ (по нишам) -->
+        <!-- ВКЛАДКА 1: СЦЕНАРИИ -->
         <div id="tab-scenarios" class="tab-content">
-            
-            <!-- Группа 1: Еда -->
+
             <div class="scenario-group">
                 <div class="scenario-group-header">
                     <span class="text-2xl">🍕</span>
@@ -434,7 +520,6 @@
                 </div>
             </div>
 
-            <!-- Группа 2: Авто -->
             <div class="scenario-group">
                 <div class="scenario-group-header">
                     <span class="text-2xl">🚗</span>
@@ -453,7 +538,6 @@
                 </div>
             </div>
 
-            <!-- Группа 3: Красота -->
             <div class="scenario-group">
                 <div class="scenario-group-header">
                     <span class="text-2xl">💅</span>
@@ -472,7 +556,6 @@
                 </div>
             </div>
 
-            <!-- Группа 4: Профессионалы -->
             <div class="scenario-group">
                 <div class="scenario-group-header">
                     <span class="text-2xl">🏢</span>
@@ -492,17 +575,16 @@
             </div>
         </div>
 
-        <!-- ВКЛАДКА 2: ВОЗРАЖЕНИЯ (критично!) -->
+        <!-- ВКЛАДКА 2: ВОЗРАЖЕНИЯ -->
         <div id="tab-objections" class="tab-content hidden">
-            
+
             <div class="mb-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
                 <p class="text-red-400 text-sm font-semibold flex items-center gap-2">
                     <i class="fas fa-fire"></i>
-                    Самые частые - нажми мгновенно
+                    Самые частые возражения — выбери и получи ответ на 3 языках
                 </p>
             </div>
 
-            <!-- Группа: Отказы -->
             <div class="scenario-group border-red-500/30">
                 <div class="scenario-group-header">
                     <span class="text-2xl">🛑</span>
@@ -514,7 +596,7 @@
                         "Нам не нужно"
                     </button>
                     <button class="trigger-btn stress" onclick="openScript('obj2')">
-                        <i class="fas fa-times-circle"></i>
+                        <i class="fas fa-check-circle"></i>
                         "У нас всё есть"
                     </button>
                     <button class="trigger-btn stress" onclick="openScript('obj3')">
@@ -525,10 +607,13 @@
                         <i class="fas fa-user-slash"></i>
                         "Директора нет"
                     </button>
+                    <button class="trigger-btn stress" onclick="openScript('obj5')">
+                        <i class="fas fa-ban"></i>
+                        "Не интересно"
+                    </button>
                 </div>
             </div>
 
-            <!-- Группа: Деньги -->
             <div class="scenario-group border-yellow-500/30">
                 <div class="scenario-group-header">
                     <span class="text-2xl">💰</span>
@@ -547,14 +632,17 @@
                         <i class="fas fa-tag"></i>
                         "Сколько стоит?"
                     </button>
+                    <button class="trigger-btn stress" onclick="openScript('money4')">
+                        <i class="fas fa-clock"></i>
+                        "Некогда"
+                    </button>
                 </div>
             </div>
 
-            <!-- Группа: Конкуренты -->
             <div class="scenario-group border-blue-500/30">
                 <div class="scenario-group-header">
                     <span class="text-2xl">📱</span>
-                    <span class="scenario-group-title text-blue-400">Конкуренты</span>
+                    <span class="scenario-group-title text-blue-400">Конкуренты / Альтернативы</span>
                 </div>
                 <div class="flex flex-wrap">
                     <button class="trigger-btn" onclick="openScript('comp1')">
@@ -565,14 +653,21 @@
                         <i class="fas fa-globe"></i>
                         "У нас есть сайт"
                     </button>
+                    <button class="trigger-btn" onclick="openScript('comp3')">
+                        <i class="fas fa-users"></i>
+                        "У нас есть подрядчик"
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('comp4')">
+                        <i class="fas fa-handshake"></i>
+                        "Уже работаем с кем-то"
+                    </button>
                 </div>
             </div>
 
-            <!-- Психология -->
             <div class="scenario-group border-green-500/30">
                 <div class="scenario-group-header">
                     <span class="text-2xl">🧠</span>
-                    <span class="scenario-group-title text-green-400">Психология</span>
+                    <span class="scenario-group-title text-green-400">Психология / Техники</span>
                 </div>
                 <div class="flex flex-wrap">
                     <button class="trigger-btn success" onclick="openScript('psy1')">
@@ -582,6 +677,10 @@
                     <button class="trigger-btn success" onclick="openScript('psy2')">
                         <i class="fas fa-microphone"></i>
                         Голос и интонации
+                    </button>
+                    <button class="trigger-btn success" onclick="openScript('psy3')">
+                        <i class="fas fa-brain"></i>
+                        Установка: Не продавать
                     </button>
                 </div>
             </div>
@@ -614,9 +713,13 @@
                 <div class="flex flex-wrap">
                     <button class="trigger-btn" onclick="openScript('dm1')">
                         <i class="fab fa-instagram text-pink-400"></i>
-                        Instagram DM
+                        Instagram DM (редизайн)
                     </button>
                     <button class="trigger-btn" onclick="openScript('dm2')">
+                        <i class="fab fa-instagram text-pink-400"></i>
+                        Instagram DM (нет сайта)
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('dm3')">
                         <i class="fab fa-telegram text-blue-400"></i>
                         Telegram
                     </button>
@@ -625,38 +728,110 @@
 
             <div class="scenario-group">
                 <div class="scenario-group-header">
-                    <span class="text-2xl">🌍</span>
-                    <span class="scenario-group-title">Языки</span>
+                    <span class="text-2xl">🇱🇻🇬🇧</span>
+                    <span class="scenario-group-title">На других языках</span>
                 </div>
                 <div class="flex flex-wrap">
-                    <button class="trigger-btn" onclick="openScript('lv1')">
+                    <button class="trigger-btn" onclick="openScript('email_lv1')">
                         <span class="text-lg">🇱🇻</span>
-                        Latviešu (LV)
+                        Email LV (редизайн)
                     </button>
-                    <button class="trigger-btn" onclick="openScript('en1')">
+                    <button class="trigger-btn" onclick="openScript('email_lv2')">
+                        <span class="text-lg">🇱🇻</span>
+                        Email LV (новый сайт)
+                    </button>
+                    <button class="trigger-btn" onclick="openScript('email_en1')">
                         <span class="text-lg">🇬🇧</span>
-                        English (EN)
+                        Email EN (редизайн)
                     </button>
+                    <button class="trigger-btn" onclick="openScript('email_en2')">
+                        <span class="text-lg">🇬🇧</span>
+                        Email EN (новый сайт)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА 4: ГАЙД -->
+        <div id="tab-guide" class="tab-content hidden">
+            <div class="scenario-group">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">🎯</span>
+                    <span class="scenario-group-title">Алгоритм работы</span>
+                </div>
+                <div class="p-4 space-y-4">
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 vizon-gradient rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Поиск</h4>
+                            <p class="text-gray-400 text-sm">Google Maps / 2GIS / zl.lv — ищи компании 4.0+ без сайта или со старым сайтом</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 vizon-gradient rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Касание</h4>
+                            <p class="text-gray-400 text-sm">Пиши персонализированно. Цель — не продать сайт, а продать ИНТЕРЕС</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 vizon-gradient rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0">3</div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Передача лида</h4>
+                            <p class="text-gray-400 text-sm">Собери: Имя, ссылку на соцсеть, номер телефона, договорённость о звонке</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-group border-red-500/30">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">⛔</span>
+                    <span class="scenario-group-title text-red-400">Важные правила</span>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-times text-red-400 mt-1"></i>
+                        <p class="text-gray-300"><strong class="text-white">Не называй цену.</strong> "Зависит от функционала, лучше с разработчиком обсудить"</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-times text-red-400 mt-1"></i>
+                        <p class="text-gray-300"><strong class="text-white">Не груби.</strong> Мы премиальный бренд. Общайся вежливо, даже при отказе.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check text-green-400 mt-1"></i>
+                        <p class="text-gray-300"><strong class="text-white">Главный аргумент:</strong> Работаем по постоплате. Клиент ничем не рискует.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-group border-green-500/30">
+                <div class="scenario-group-header">
+                    <span class="text-2xl">💎</span>
+                    <span class="scenario-group-title text-green-400">Чит-код (главный аргумент)</span>
+                </div>
+                <div class="p-4">
+                    <div class="phrase-block">
+                        <p class="phrase-text text-lg">"Мы сделаем сайт, вы увидите результат. <span class="key-highlight">Если понравится — оплачиваете. Если нет — расходимся. Рисков ноль.</span>"</p>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-3">Этот аргумент сложно отвергнуть. Используй в каждом разговоре.</p>
                 </div>
             </div>
         </div>
 
         <!-- Результаты поиска -->
         <div id="searchResults" class="hidden space-y-3">
-            <!-- Заполняется JS -->
         </div>
 
         <!-- Активный скрипт -->
         <div id="activeScript" class="hidden mt-4">
-            <!-- Заполняется JS -->
         </div>
 
     </main>
 
-    <!-- Быстрые действия -->
     <div class="quick-actions">
-        <button class="fab-btn" onclick="toggleFavorites()" title="Избранное">
-            <i class="fas fa-star"></i>
+        <button class="fab-btn" onclick="scrollToTop()" title="Наверх">
+            <i class="fas fa-arrow-up"></i>
         </button>
         <button class="fab-btn urgent" onclick="panicMode()" title="SOS - срочная помощь">
             <i class="fas fa-ambulance"></i>
@@ -664,13 +839,16 @@
     </div>
 
     <script>
-        // База знаний - оптимизированная для скорости
+
+        // Полная база знаний с трёхъязычной поддержкой
         const scripts = {
-            // Еда
+            // ==================== СЦЕНАРИИ ЗВОНКОВ ====================
+
             food1: {
-                title: "🍕 Пиццерия / Ресторан",
+                title: "🍕 Пиццерия / Ресторан / Доставка",
                 goal: "Взять номер владельца/управляющего",
                 time: "2-3 мин",
+                type: "dialogue",
                 dialogue: [
                     { speaker: "manager", text: "Алло, это {Название}?" },
                     { speaker: "client", text: "Да, здравствуйте." },
@@ -678,29 +856,29 @@
                     { speaker: "client", text: "А по какому вопросу?" },
                     { speaker: "manager", text: "Мы занимаемся цифровизацией общепита. У нас есть предложение, как вам онлайн-заказы наладить, чтобы они не терялись. <span class='power-word'>Это не реклама, мы по постоплате работаем.</span> Скиньте номер главного?" }
                 ],
-                tags: ["еда", "ресторан", "доставка"]
+                tags: ["еда", "ресторан", "доставка", "пицца"]
             },
-            
-            // Авто
+
             auto1: {
-                title: "🚗 Автосервис / СТО",
+                title: "🚗 Автосервис / СТО / Детейлинг",
                 goal: "Зайти через 'хочу дать работу'",
                 time: "2-3 мин",
+                type: "dialogue",
                 dialogue: [
                     { speaker: "manager", text: "Алло, {Название}? Ремонтом занимаетесь?" },
                     { speaker: "client", text: "Да." },
                     { speaker: "manager", text: "Отлично. <span class='key-phrase'>Я хочу вам клиентов подгонять на ремонт.</span> Нашел вас на картах, вижу вы толковые. С кем можно перетереть насчет партнерства?" },
                     { speaker: "client", text: "А что за клиенты?" },
-                    { speaker: "manager", text: "Я из студии Vižon. Мы делаем сайты, которые генерируют заявки. <span class='power-word'>Хочу предложить владельцу сделать сайт бесплатно (по постоплате)</span>, чтобы у вас работы больше было. Дайте его контакт?" }
+                    { speaker: "manager", text: "Я из студии Vižon. Мы делаем сайты, которые генерируют заявки. <span class='power-word'>Хочу предложить владельцу сделать нормальный сайт бесплатно (по постоплате)</span>, чтобы у вас работы больше было. Дайте его контакт?" }
                 ],
-                tags: ["авто", "сервис", "ремонт"]
+                tags: ["авто", "сервис", "ремонт", "сто"]
             },
 
-            // Салон
             beauty1: {
-                title: "💅 Салон / Барбершоп",
+                title: "💅 Салон красоты / Барбершоп",
                 goal: "Пробить админа, взять номер босса",
                 time: "3-4 мин",
+                type: "dialogue",
                 dialogue: [
                     { speaker: "manager", text: "Добрый день, салон {Название}?" },
                     { speaker: "client", text: "Да." },
@@ -708,14 +886,14 @@
                     { speaker: "client", text: "Пишите на почту / Мы не заинтересованы." },
                     { speaker: "manager", text: "Понимаю вашу работу. Но смотрите, <span class='power-word'>мы работаем без предоплаты</span>. Директор ничего не теряет, а вы можете получить больше клиентов (и чаевых). Я просто хочу передать контакт разработчику, он ей наберет на 2 минуты. Если скажет 'нет' — больше не побеспокоим. Какой у неё номер?" }
                 ],
-                tags: ["салон", "красота", "админ"]
+                tags: ["салон", "красота", "барбер", "админ"]
             },
 
-            // Юристы
             pro1: {
-                title: "🏢 Юристы / Бухгалтеры",
+                title: "🏢 Юристы / Бухгалтеры / Офис",
                 goal: "Пройти секретаря",
                 time: "3-4 мин",
+                type: "dialogue",
                 dialogue: [
                     { speaker: "manager", text: "Добрый день. <span class='key-phrase'>Соедините с генеральным директором, пожалуйста.</span>" },
                     { speaker: "client", text: "По какому вопросу?" },
@@ -723,126 +901,540 @@
                     { speaker: "client", text: "Пришлите КП на почту." },
                     { speaker: "manager", text: "Я пришлю, но вопрос срочный. Давайте так: вы мне дадите его прямой номер или почту, я ему напишу, что это от Vižon. <span class='power-word'>Мы работаем по факту выполненных работ</span>, так что директору это будет интересно." }
                 ],
-                tags: ["офис", "секретарь", "профессионалы"]
+                tags: ["офис", "секретарь", "юрист", "бухгалтер"]
             },
 
-            // ВОЗРАЖЕНИЯ
+            // ==================== ВОЗРАЖЕНИЯ (ТРЁХЪЯЗЫЧНЫЕ) ====================
+
             obj1: {
-                title: "🛑 «Нам не нужно / У нас всё есть»",
-                type: "antwort",
-                text: "<span class='power-word'>Я вас понял. Но я не продаю ничего.</span> Мы предлагаем сделать сайт, вы смотрите. Если нравится — берете. Вы вообще ничем не рискуете. Дайте просто номер директора, он сам решит, нужна ему халява или нет.",
-                accent: "НЕ просим — предлагаем"
+                title: "🛑 «Нам не нужно»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Я вас понял. Но я не продаю ничего. Мы предлагаем сделать сайт, вы смотрите. Если нравится — берете. Вы вообще ничем не рискуете. Дайте просто номер директора, он сам решит, нужна ему халява или нет.",
+                    accent: "НЕ просим — предлагаем"
+                },
+                lv: {
+                    phrase: "Es jūs saprotu. Bet es nepārdodu neko. Mēs piedāvājam izveidot mājaslapu, jūs apskatāt. Ja patīk — ņemat. Jūs vispār neriskējat ar neko. Dodiet vienkārši direktora numuru, viņš pats izlems, vai viņam vajag šo iespēju vai nē.",
+                    accent: "NE lūdzam — piedāvājam"
+                },
+                en: {
+                    phrase: "I understand. But I'm not selling anything. We offer to make a website, you take a look. If you like it — you take it. You don't risk anything at all. Just give me the director's number, he'll decide if he wants this opportunity or not.",
+                    accent: "NOT asking — offering"
+                },
+                tags: ["не нужно", "отказ", "нужно"]
+            },
+
+            obj2: {
+                title: "✓ «У нас всё есть»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Отлично! Значит вы уже понимаете ценность онлайна. Но скажите честно — ваш текущий сайт приносит клиентов? Или он просто 'есть'? Мы делаем сайты, которые продают. И по постоплате — вы ничем не рискуете. Дайте директору решить, стоит ли смотреть.",
+                    accent: "Не спорим — уточняем эффективность"
+                },
+                lv: {
+                    phrase: "Lieliski! Tātad jūs jau saprotat tiešsaistes vērtību. Bet sakiet godīgi — vai jūsu pašreizējā mājaslapa piesaista klientus? Vai viņa vienkārši 'ir'? Mēs veidojam mājaslapas, kas pārdod. Un ar pēcapmaksu — jūs neriskējat neko. Ļaujiet direktoram izlemt, vai ir vērts apskatīt.",
+                    accent: "Nestrīdamies — precizējam efektivitāti"
+                },
+                en: {
+                    phrase: "Great! So you already understand the value of being online. But tell me honestly — does your current website bring clients? Or does it just 'exist'? We make websites that sell. And with post-payment — you risk nothing. Let the director decide if it's worth looking at.",
+                    accent: "Not arguing — clarifying effectiveness"
+                },
+                tags: ["все есть", "уже есть", "есть сайт"]
             },
 
             obj3: {
                 title: "📧 «Пришлите на почту»",
-                type: "antwort",
-                text: "<span class='power-word'>Конечно пришлю. Но почту никто не читает.</span> Давайте я лучше вашему главному в Вотсап/Телеграм напишу коротко? Продиктуйте номер.",
-                accent: "Срочность + альтернатива"
+                type: "trilingual",
+                ru: {
+                    phrase: "Конечно пришлю. Но почту никто не читает. Давайте я лучше вашему главному в Вотсап/Телеграм напишу коротко? Продиктуйте номер. Это займет 2 минуты, а не 2 дня.",
+                    accent: "Срочность + альтернатива"
+                },
+                lv: {
+                    phrase: "Protams, aizsūtīšu. Bet e-pastu neviens nelasa. Dodiet, es labāk uzrakstīšu jūsu priekšniekam WhatsApp/Telegram īsi? Pateikt numuru. Tas aizņems 2 minūtes, nevis 2 dienas.",
+                    accent: "Steidzamība + alternatīva"
+                },
+                en: {
+                    phrase: "Of course I'll send it. But nobody reads emails. Let me just write briefly to your boss on WhatsApp/Telegram instead? Dictate the number. It takes 2 minutes, not 2 days.",
+                    accent: "Urgency + alternative"
+                },
+                tags: ["почта", "email", "пришлите"]
             },
 
             obj4: {
                 title: "👤 «Директора нет»",
-                type: "antwort",
-                text: "<span class='power-word'>Окей. А когда будет?</span> Или дайте его мобильный, я ему смс скину, он сам перезвонит, когда освободится.",
-                accent: "Не отступаем — уточняем"
+                type: "trilingual",
+                ru: {
+                    phrase: "Окей. А когда будет? Или дайте его мобильный, я ему смс скину, он сам перезвонит, когда освободится. Я не буду ему названивать — просто короткое сообщение с предложением.",
+                    accent: "Не отступаем — уточняем"
+                },
+                lv: {
+                    phrase: "Labi. Bet kad viņš būs? Vai dodiet viņa mobilo, es aizsūtīšu sms, viņš pats pārzvanīs, kad atbrīvosies. Es viņam nezvanīšu uzreiz — tikai īsu ziņu ar piedāvājumu.",
+                    accent: "Neatkāpjamies — precizējam"
+                },
+                en: {
+                    phrase: "Okay. When will he be available? Or give me his mobile, I'll send him an SMS, he'll call back when he's free. I won't call him right away — just a short message with the offer.",
+                    accent: "Not retreating — clarifying"
+                },
+                tags: ["директора нет", "нет", "не доступен"]
+            },
+
+            obj5: {
+                title: "🚫 «Не интересно»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Понимаю, звонков много. Но я не продавец — я партнер. Я приношу клиентов, а не беру деньги. У нас постоплата — вы сначала видите результат. Дайте директору самому решить, ок? Два минуты разговора.",
+                    accent: "Партнер, не продавец"
+                },
+                lv: {
+                    phrase: "Saprotu, zvanu daudz. Bet es neesmu pārdevējs — es esmu partneris. Es atnesu klientus, nevis ņemu naudu. Mums ir pēcapmaksa — vispirms redzat rezultātu. Ļaujiet direktoram pašam izlemt, labi? Divas minūtes sarunas.",
+                    accent: "Partneris, ne pārdevējs"
+                },
+                en: {
+                    phrase: "I understand, you get many calls. But I'm not a salesperson — I'm a partner. I bring clients, not take money. We have post-payment — you see the result first. Let the director decide himself, okay? Two minutes of conversation.",
+                    accent: "Partner, not seller"
+                },
+                tags: ["не интересно", "не интересует"]
             },
 
             money1: {
                 title: "💰 «Денег нет»",
-                type: "antwort",
-                text: "<span class='power-word'>Так я поэтому и звоню!</span> Я же не прошу денег сейчас. Мы работаем по постоплате. Вы платите, когда у вас уже будет готовый инструмент, который начнет приносить деньги. Это идеальный вариант для 'не сезона'.",
-                accent: "Постоплата — решение"
+                type: "trilingual",
+                ru: {
+                    phrase: "Так я поэтому и звоню! Я же не прошу денег сейчас. Мы работаем по постоплате. Вы платите, когда у вас уже будет готовый инструмент, который начнет приносить деньги. Это идеальный вариант для 'не сезона'.",
+                    accent: "Постоплата — решение"
+                },
+                lv: {
+                    phrase: "Tāpēc es arī zvanu! Es jau tagad neprasu naudu. Mēs strādājam ar pēcapmaksu. Jūs maksājat, kad jums jau būs gatavs instruments, kas sāks nest naudu. Tas ir ideāls variants 'ne sezonai'.",
+                    accent: "Pēcapmaksa — risinājums"
+                },
+                en: {
+                    phrase: "That's exactly why I'm calling! I'm not asking for money now. We work on post-payment. You pay when you already have a ready tool that will start bringing money. This is the perfect option for 'off-season'.",
+                    accent: "Post-payment — solution"
+                },
+                tags: ["денег нет", "нет денег", "дорого"]
+            },
+
+            money2: {
+                title: "📅 «Не сезон»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Идеально! Как раз время подготовиться к сезону. Мы сделаем сайт сейчас, вы протестируете, доработаем. А когда сезон начнется — вы уже с рабочим инструментом. И платите только когда всё готово.",
+                    accent: "Подготовка к сезону"
+                },
+                lv: {
+                    phrase: "Ideāli! Tieši laiks sagatavoties sezonai. Mēs izveidosim mājaslapu tagad, jūs patestēsiet, pabeigsim. Un kad sezona sāksies — jūs jau ar strādājošu instrumentu. Un maksājat tikai, kad viss gatavs.",
+                    accent: "Gatavošanās sezonai"
+                },
+                en: {
+                    phrase: "Perfect! Just the time to prepare for the season. We'll make the website now, you test it, we finalize it. And when the season starts — you already have a working tool. And you pay only when everything is ready.",
+                    accent: "Preparing for season"
+                },
+                tags: ["не сезон", "сезон", "время"]
             },
 
             money3: {
                 title: "🏷️ «Сколько стоит?»",
-                type: "antwort",
-                text: "<span class='power-word'>Это зависит от функционала.</span> Лучше обсудить с разработчиком, он технарь, скажет точнее. Но напоминаю — платить сразу не нужно.",
-                accent: "Не называем цену!"
+                type: "trilingual",
+                ru: {
+                    phrase: "Это зависит от функционала. Лучше обсудить с разработчиком, он технарь, скажет точнее. Но напоминаю — платить сразу не нужно. Мы сначала делаем, вы смотрите, потом решаете.",
+                    accent: "Не называем цену!"
+                },
+                lv: {
+                    phrase: "Tas atkarīgs no funkcionalitātes. Labāk apspriest ar izstrādātāju, viņš ir tehniķis, pateiks precīzāk. Bet atgādinu — maksāt uzreiz nav jā. Mēs vispirms izdarām, jūs apskatāt, tad lemjat.",
+                    accent: "Nenosaucam cenu!"
+                },
+                en: {
+                    phrase: "It depends on functionality. Better to discuss with the developer, he's the tech guy, will tell you more accurately. But I remind you — no need to pay right away. We do it first, you look, then decide.",
+                    accent: "Don't name the price!"
+                },
+                tags: ["сколько стоит", "цена", "стоимость"]
+            },
+
+            money4: {
+                title: "⏰ «Некогда»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Понимаю, вы заняты. Поэтому я и предлагаю: мой разработчик сам всё сделает. Вам только посмотреть результат — 5 минут. Это сэкономит вам часы в будущем, потому что сайт будет работать за вас.",
+                    accent: "Экономия времени"
+                },
+                lv: {
+                    phrase: "Saprotu, jums aizņemts. Tāpēc es arī piedāvāju: mans izstrādātājs pats visu izdarīs. Jums tikai apskatīt rezultātu — 5 minūtes. Tas ietaupīs jums stundas nākotnē, jo mājaslapa strādās jūsu vietā.",
+                    accent: "Laika ietaupījums"
+                },
+                en: {
+                    phrase: "I understand, you're busy. That's why I'm offering: my developer will do everything himself. You just look at the result — 5 minutes. It will save you hours in the future because the website will work for you.",
+                    accent: "Time saving"
+                },
+                tags: ["некогда", "нет времени", "занят"]
             },
 
             comp1: {
                 title: "📱 «У нас есть Инстаграм»",
-                type: "antwort",
-                text: "<span class='power-word'>Согласен, у вас крутой Инстаграм!</span> Но Инстаграм — это как съемная квартира: сегодня он есть, завтра теневой бан или блокировка. А сайт — это ваша собственность. Плюс, люди ищут 'пиццу/стрижку' в Гугле, а не в Инсте. Вы теряете этих клиентов.",
-                accent: "Сайт = собственность"
+                type: "trilingual",
+                ru: {
+                    phrase: "Согласен, у вас крутой Инстаграм! Но Инстаграм — это как съемная квартира: сегодня он есть, завтра теневой бан или блокировка. А сайт — это ваша собственность. Плюс, люди ищут 'пиццу/стрижку' в Гугле, а не в Инсте. Вы теряете этих клиентов.",
+                    accent: "Сайт = собственность"
+                },
+                lv: {
+                    phrase: "Piekrītu, jums foršs Instagram! Bet Instagram ir kā īrēts dzīvoklis: šodien tas ir, rīt ēnu bans vai bloķēšana. Bet mājaslapa — tas ir jūsu īpašums. Plus, cilvēki meklē 'pizzu/griezumu' Google, nevis Instā. Jūs zaudējat šos klientus.",
+                    accent: "Mājaslapa = īpašums"
+                },
+                en: {
+                    phrase: "Agreed, you have a cool Instagram! But Instagram is like a rented apartment: today it exists, tomorrow shadow ban or blocking. But a website — that's your property. Plus, people search for 'pizza/haircut' on Google, not Insta. You're losing these clients.",
+                    accent: "Website = property"
+                },
+                tags: ["инстаграм", "instagram", "соцсети"]
             },
 
-            // ПСИХОЛОГИЯ
+            comp2: {
+                title: "🌐 «У нас есть сайт»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Отлично! Значит вы понимаете ценность. Но скажите — он приносит клиентов? Мы специализируемся на 'живом дизайне' — сайтах, которые продают. Давайте наш разработчик посмотрит ваш текущий сайт и скажет, что можно улучшить. Бесплатно.",
+                    accent: "Улучшение, не замена"
+                },
+                lv: {
+                    phrase: "Lieliski! Tātad jūs saprotat vērtību. Bet sakiet — vai viņš piesaista klientus? Mēs specializējamies uz 'dzīvo dizainu' — mājaslapām, kas pārdod. Dodiet, mūsu izstrādātājs apskatīs jūsu pašreizējo mājaslapu un pateiks, ko var uzlabot. Bez maksas.",
+                    accent: "Uzlabošana, ne aizvietošana"
+                },
+                en: {
+                    phrase: "Great! So you understand the value. But tell me — does it bring clients? We specialize in 'live design' — websites that sell. Let our developer look at your current website and tell you what can be improved. For free.",
+                    accent: "Improvement, not replacement"
+                },
+                tags: ["есть сайт", "уже есть сайт"]
+            },
+
+            comp3: {
+                title: "👷 «У нас есть подрядчик»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Отлично, значит процесс знаком. Но вопрос — довольны ли результатом? Мы работаем по постоплате — это как страховка. Если ваш подрядчик пропадет или затянет сроки — у вас есть план Б. Давайте просто посмотрите наш вариант.",
+                    accent: "План Б"
+                },
+                lv: {
+                    phrase: "Lieliski, tātad process pazīstams. Bet jautājums — vai esat apmierināti ar rezultātu? Mēs strādājam ar pēcapmaksu — tas kā apdrošināšana. Ja jūsu izpildītājs pazudīs vai vilks termiņus — jums ir B plāns. Dodiet, vienkārši apskatīsim mūsu variantu.",
+                    accent: "B plāns"
+                },
+                en: {
+                    phrase: "Great, so you know the process. But the question — are you satisfied with the result? We work on post-payment — it's like insurance. If your contractor disappears or delays deadlines — you have a plan B. Let's just look at our option.",
+                    accent: "Plan B"
+                },
+                tags: ["подрядчик", "есть подрядчик", "работаем с"]
+            },
+
+            comp4: {
+                title: "🤝 «Уже работаем с кем-то»",
+                type: "trilingual",
+                ru: {
+                    phrase: "Понимаю. Но рынок меняется быстро. Мы предлагаем свежий взгляд — бесплатный аудит текущего сайта. Если ваш текущий подрядчик делает всё идеально — отлично, вы убедитесь. Если нет — у вас будет альтернатива. Давайте директор решит?",
+                    accent: "Второе мнение"
+                },
+                lv: {
+                    phrase: "Saprotu. Bet tirgus mainās ātri. Mēs piedāvājam svaigu skatījumu — bezmaksas auditu pašreizējai mājaslapai. Ja jūsu pašreizējais izpildītājs dara visu ideāli — lieliski, jūs pārliecināties. Ja nē — jums būs alternatīva. Dodiet direktoram izlemt?",
+                    accent: "Otrais viedoklis"
+                },
+                en: {
+                    phrase: "I understand. But the market changes quickly. We offer a fresh look — free audit of the current website. If your current contractor does everything perfectly — great, you'll be convinced. If not — you'll have an alternative. Let the director decide?",
+                    accent: "Second opinion"
+                },
+                tags: ["уже работаем", "есть кто-то", "заняты"]
+            },
+
+            // ==================== ПСИХОЛОГИЯ ====================
+
             psy1: {
                 title: "🔑 Чит-код: ПОСТОПЛАТА",
                 type: "psychology",
-                text: "Волшебное слово <span class='power-word'>ПОСТОПЛАТА</span>. Это твой таран. Используй в каждом втором предложении, если клиент сопротивляется.",
-                rule: "Говори медленно, уверенно, низким голосом. Ты идешь с чемоданом денег (клиентов), а не с протянутой рукой."
+                content: "Волшебное слово <span class='power-word'>ПОСТОПЛАТА</span>. Это твой таран. Используй в каждом втором предложении, если клиент сопротивляется.",
+                rule: "Говори медленно, уверенно, низким голосом. Ты идешь с чемоданом денег (клиентов), а не с протянутой рукой.",
+                tags: ["постоплата", "чит-код", "ключ"]
             },
 
-            // EMAIL
+            psy2: {
+                title: "🎤 Голос и интонации",
+                type: "psychology",
+                content: "Голос решает. Тараторящих 'продавников' посылают. Спокойных 'партнеров' слушают.",
+                rule: "Говори медленно, уверенно, низким голосом. Паузы важнее слов.",
+                tags: ["голос", "интонация", "речь"]
+            },
+
+            psy3: {
+                title: "🧠 Установка: Не продавать",
+                type: "psychology",
+                content: "Ты не просишь, ты предлагаешь. Ты идешь к ним с чемоданом денег (клиентов), а не с протянутой рукой.",
+                rule: "Если они отказываются — это их проблема, а не твоя. Ты приносишь ценность.",
+                tags: ["установка", "психология", "настрой"]
+            },
+
+            // ==================== EMAIL ШАБЛОНЫ ====================
+
             email1: {
                 title: "📧 Email: Редизайн (сайт есть)",
                 type: "email",
                 template: `Тема: Идея редизайна для {Название} (оплата по факту)
 
-Здравствуйте!
+Здравствуйте, {Имя или Команда}!
 
-Пишу, так как увидел ваш бизнес. Честно — сайт немного отстает от качества сервиса. Сейчас он выглядит статичным и сложным для клиента (особенно с телефона).
+Пишу вам, так как увидел ваш бизнес в {Где нашли}, и мне очень понравился ваш продукт/сервис. Видно, что вы держите уровень.
 
-Мы делаем «живой дизайн» — понятный, с анимацией, который ведет клиента к покупке.
+Именно поэтому обратил внимание на ваш текущий сайт. Честно говоря, он немного отстает от качества вашего сервиса. Сейчас он выглядит статичным и сложным для клиента (особенно с телефона).
 
-<span class="power-word">Работаем по постоплате:</span>
-• Разрабатываем концепт — показываем
-• Вы платите только если нравится
-• Рисков ноль
+Кто мы:
+Мы команда разработчиков, которая не просто "делает сайты", а занимается полным редизайном. Мы убираем визуальный шум и делаем "живой дизайн" — понятный, с современной анимацией, который ведет клиента к покупке.
 
-Мой разработчик готов созвониться на 5-10 мин, показать примеры.
+Наше предложение уникально для рынка:
+Мы настолько уверены в качестве своих работ, что готовы работать по постоплате.
 
-Когда удобно?
+• Мы разрабатываем концепт и показываем результат
+• Вы платите только если вам нравится
+• Рисков для вас — ноль
 
-{Имя}`,
-                tags: ["email", "редизайн"]
+Мой ведущий разработчик готов созвониться с вами на 5-10 минут, показать примеры "живых" интерфейсов и объяснить, как мы можем освежить именно ваш проект.
+
+Когда вам удобно было бы услышать его идеи?
+
+С уважением,
+{Имя Лидгена}
+Менеджер проектов`,
+                tags: ["email", "редизайн", "письмо"]
             },
 
             email2: {
                 title: "📧 Email: Новый сайт (нет сайта)",
                 type: "email",
-                template: `Тема: Сайт для {Название} (без предоплаты)
+                template: `Тема: Сайт для {Название} (модель работы без предоплаты)
 
-Здравствуйте!
+Здравствуйте, {Имя или Команда}!
 
-Нашел вас в картах. Отличная репутация, но нет сайта. Клиенты сначала «гуглят» — если не находят, уходят к конкурентам. Вы теряете теплых клиентов каждый день.
+Пишу вам, так как нашел вашу компанию в {Карты/Каталог} при поиске услуг в вашем районе. У вас отличная репутация и отзывы, это вызывает уважение.
 
-<span class="power-word">Vižon работает иначе:</span>
-• Делаем сайт — показываем результат
-• Видите реальный продукт
-• Оплачиваете только если устраивает
-• Рисков — 0
+Но я заметил одну деталь, которая сдерживает ваш рост: отсутствие современного веб-сайта.
 
-5-10 минут на созвон — найдется время?
+В нашей сфере (будь то юридические услуги, автосервис или медицина) клиенты сначала "гуглят". Если они не находят понятный сайт с ценами и услугами — они уходят к конкурентам, у которых он есть. Вы теряете "теплых" клиентов каждый день.
 
-{Имя}`,
-                tags: ["email", "новый сайт"]
+Кто мы:
+Меня зовут {Имя Лидгена}, я представляю студию Vižon.
+
+Мы не делаем шаблонные сайты-визитки. Мы создаем премиальный "живой дизайн" — понятный, интерактивный и вызывающий доверие с первой секунды.
+
+Наше главное отличие:
+Мы знаем, как сложно найти надежных подрядчиков. Обычно агентства просят 50% предоплаты за "кота в мешке".
+
+Vižon работает иначе.
+
+Мы работаем строго по постоплате:
+• Мы разрабатываем концепт и демонстрируем его вам
+• Вы видите реальный, работающий продукт
+• Оплачиваете только если результат вас устраивает
+• Рисков для вас — 0
+
+Мой ведущий разработчик готов уделить вам 5-10 минут, чтобы объяснить, как сайт окупится в вашем бизнесе, а также обсудить ваши пожелания и конечную цену.
+
+Найдется время для короткого звонка на этой неделе?
+
+С уважением,
+{Имя Лидгена}
+Partner Manager, Vižon`,
+                tags: ["email", "новый сайт", "нет сайта"]
+            },
+
+            dm1: {
+                title: "💬 Instagram DM: Редизайн",
+                type: "email",
+                template: `Привет, {Название_Бренда}! 👋
+
+У вас очень крутой контент в профиле, но я перешел по ссылке на сайт и заметил сильный контраст. Соц.сети у вас живые и сочные, а сайт кажется немного устаревшим и сложным. Клиенту там легко потеряться.
+
+Мы с командой как раз специализируемся на редизайне: берем сложные сайты и переделываем их в понятные, "живые" истории с крутой анимацией.
+
+Хотим предложить вам обновить визуал.
+
+Самое главное: мы работаем без предоплаты. Сначала делаем — вы смотрите, щупаете. Если нравится и видите разницу — оплачиваете. Никаких рисков.
+
+Давайте мой ведущий разработчик наберет вас, расскажет свое видение по вашему сайту? Обсудим ваши предпочтения, контент сайта и конечную цену, это займет пару минут.
+
+Что скажете?`,
+                tags: ["dm", "instagram", "директ"]
+            },
+
+            dm2: {
+                title: "💬 Instagram DM: Нет сайта",
+                type: "email",
+                template: `Здравствуйте, {Название_Компании}! 👋
+
+Увидел вас в поиске/картах, отличный у вас рейтинг! Но заметил, что у вас нет ссылки на сайт.
+
+В 2026 году это потеря клиентов. Люди хотят видеть услуги и цены онлайн, удобно и с телефона. Без сайта доверие к бизнесу всегда ниже.
+
+Мы — студия Vižon. Мы делаем премиальные сайты с "живым" дизайном, которые закрывают клиентов на сделку.
+
+Сразу к делу: Мы настолько уверены в качестве, что работаем без предоплаты.
+
+Сначала делаем сайт -> Вы смотрите -> Если нравится, оплачиваете.
+
+Хотите, мой коллега (ведущий разработчик) наберет вас и расскажет, как это может выглядеть для вашего бизнеса? Это бесплатно и займет пару минут.`,
+                tags: ["dm", "instagram", "нет сайта"]
+            },
+
+            // ==================== LATVIAN EMAILS ====================
+
+            email_lv1: {
+                title: "🇱🇻 Email LV: Redizains (ir vietne)",
+                type: "email",
+                template: `Tēma: Redizaina ideja uzņēmumam {Uzņēmuma_Nosaukums} (apmaksa pēc rezultāta)
+
+Labdien, {Vārds vai Komanda}!
+
+Rakstu jums, jo pamanīju jūsu biznesu {Kur atradāt}, un man ļoti iepatikās jūsu produkts/pakalpojums. Ir redzams, ka uzturat augstu līmeni.
+
+Tieši tāpēc pievērsu uzmanību jūsu pašreizējai mājaslapai. Godīgi sakot, tā nedaudz atpaliek no jūsu servisa kvalitātes. Šobrīd tā izskatās nedaudz statiska un klientam grūti uztverama (it īpaši no telefona).
+
+Kas mēs esam:
+Mēs esam izstrādātāju komanda, kas nevis vienkārši "taisa mājaslapas", bet nodarbojas ar pilnu redizainu. Mēs noņemam vizuālo troksni un veidojam "dzīvu dizainu" - saprotamu, ar mūsdienīgu animāciju, kas burtiski aizved klientu līdz pirkumam.
+
+Mūsu piedāvājums ir unikāls tirgū:
+Mēs esam tik pārliecināti par savu darbu kvalitāti, ka esam gatavi strādāt ar pēcapmaksu.
+
+• Mēs izstrādājam konceptu un parādām rezultātu
+• Jūs maksājat tikai tad, ja jums patīk
+• Risku jums nav - nulle
+
+Mans vadošais izstrādātājs ir gatavs sazvanīties ar jums uz 5-10 minūtēm, parādīt "dzīvu" interfeisu piemērus un paskaidrot, kā mēs varam atsvaidzināt tieši jūsu projektu.
+
+Kad jums būtu ērti uzklausīt viņa idejas?
+
+Ar cieņu,
+{Jūsu Vārds}
+Projektu vadītājs`,
+                tags: ["latvian", "lv", "редизайн"]
+            },
+
+            email_lv2: {
+                title: "🇱🇻 Email LV: Jauna vietne (nav vietnes)",
+                type: "email",
+                template: `Tēma: Mājaslapa uzņēmumam {Uzņēmuma_Nosaukums} (darba modelis bez priekšapmaksas)
+
+Labdien, {Vārds vai Komanda}!
+
+Rakstu jums, jo atradu jūsu uzņēmumu {Kartēs/Katalogā}, meklējot pakalpojumus jūsu rajonā. Jums ir lieliska reputācija un atsauksmes, tas vieš cieņu.
+
+Tomēr es pamanīju vienu detaļu, kas kavē jūsu izaugsmi: mūsdienīgas mājaslapas trūkums.
+
+Mūsu nozarē (vai tie būtu juridiskie pakalpojumi, autoserviss vai medicīna) klienti vispirms "gūglē". Ja viņi neatrod saprotamu lapu ar cenām un pakalpojumiem, viņi aiziet pie konkurentiem, kam tāda ir. Jūs zaudējat "siltos" klientus katru dienu.
+
+Kas mēs esam:
+Mani sauc {Jūsu Vārds}, es pārstāvu studiju Vižon.
+
+Mēs neveidojam šabloniskas "vizītkartes". Mēs radām premium klases "dzīvo dizainu" - saprotamu, interaktīvu un tādu, kas rada uzticību no pirmās sekundes.
+
+Mūsu galvenā atšķirība:
+Mēs zinām, cik grūti ir atrast uzticamus sadarbības partnerus. Parasti aģentūras prasa 50% priekšapmaksu par "kaķi maisā".
+
+Vižon strādā citādi.
+
+Mēs strādājam stingri ar pēcapmaksu:
+• Mēs izstrādājam konceptu un demonstrējam to jums
+• Jūs redzat reālu, strādājošu produktu
+• Maksājat tikai tad, ja rezultāts jūs apmierina
+• Risku jums nav - 0
+
+Mans vadošais izstrādātājs ir gatavs veltīt jums 5-10 minūtes, lai paskaidrotu, kā mājaslapa atmaksāsies jūsu biznesā, kā arī apspriestu jūsu vēlmes un gala cenu.
+
+Vai atrastos laiks īsam zvanam šonedēļ?
+
+Ar cieņu,
+{Jūsu Vārds}
+Partner Manager, Vižon`,
+                tags: ["latvian", "lv", "новый сайт"]
+            },
+
+            email_en1: {
+                title: "🇬🇧 Email EN: Redesign (has website)",
+                type: "email",
+                template: `Subject: Redesign concept for {Company_Name} (Payment upon satisfaction)
+
+Hello, {Name or Team}!
+
+I am writing to you because I saw your business on {Source/Where you found them}, and I really liked your product/service. It is clear that you maintain a high standard.
+
+That is exactly why I paid attention to your current website. Honestly, it lags a bit behind the quality of your service. Right now, it looks somewhat static and difficult for a client to perceive (especially from a phone).
+
+Who we are:
+We are a team of developers who don't just "make websites," but specialize in full redesigns. We remove visual noise and create "live design" - clear, with modern animation that leads the client by the hand to a purchase.
+
+Our offer is unique to the market:
+We are so confident in the quality of our work that we are ready to work on a post-payment basis.
+
+• We develop a concept and show you the result
+• You pay only if you like it
+• Zero risk for you
+
+My Lead Developer (who is responsible for the entire visual part) is ready to jump on a 5-10 minute call with you to show examples of "live" interfaces and explain how we can refresh your specific project.
+
+When would be a convenient time for you to hear his ideas?
+
+Best regards,
+{Your Name}
+Project Manager`,
+                tags: ["english", "en", "redesign"]
+            },
+
+            email_en2: {
+                title: "🇬🇧 Email EN: New website (no website)",
+                type: "email",
+                template: `Subject: Website for {Company_Name} (No prepayment model)
+
+Hello, {Name or Team}!
+
+I am writing because I found your company in {Maps/Directory} while searching for services in your area. You have an excellent reputation and reviews, which commands respect.
+
+However, I noticed one detail that is holding back your growth: the lack of a modern website.
+
+In our field (whether it be legal services, auto repair, or medicine), clients "Google" first. If they don't find a clear site with prices and services, they leave for competitors who have one. You are losing "warm" clients every day.
+
+Who we are:
+My name is {Your Name}, and I represent the Vižon studio.
+
+We don't make template "business card" sites. We create premium "live design" - clear, interactive, and inspiring trust from the very first second.
+
+Our main difference:
+We know how hard it is to find reliable contractors. Usually, agencies ask for a 50% prepayment for a "pig in a poke" (uncertain outcome).
+
+Vižon works differently.
+
+We work strictly on post-payment:
+• We develop the concept and demonstrate it to you
+• You see a real, working product
+• You pay only if the result satisfies you
+• Risks for you - 0
+
+My Lead Developer is ready to spare 5-10 minutes to explain how a site will pay for itself in your business, discuss your preferences, and discuss the final price.
+
+Do you have time for a short call this week?
+
+Best regards,
+{Your Name}
+Partner Manager, Vižon`,
+                tags: ["english", "en", "new website"]
             }
         };
 
         // Горячие клавиши
         document.addEventListener('keydown', (e) => {
-            // Поиск по /
             if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
                 e.preventDefault();
                 document.getElementById('searchInput').focus();
             }
-            
-            // Сброс по ESC
+
             if (e.key === 'Escape') {
                 document.getElementById('searchInput').value = '';
                 document.getElementById('searchResults').classList.add('hidden');
                 document.getElementById('activeScript').classList.add('hidden');
                 document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('hidden'));
             }
-            
-            // Табы 1-2-3
-            if (e.key >= '1' && e.key <= '3') {
-                const tabs = ['scenarios', 'objections', 'scripts'];
+
+            if (e.key >= '1' && e.key <= '4') {
+                const tabs = ['scenarios', 'objections', 'scripts', 'guide'];
                 const idx = parseInt(e.key) - 1;
                 if (tabs[idx]) {
                     const btn = document.querySelector(`[onclick="switchTab('${tabs[idx]}', this)"]`);
@@ -854,11 +1446,10 @@
         function switchTab(tabName, btn) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
             document.getElementById('tab-' + tabName).classList.remove('hidden');
-            
+
             document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            // Скрываем результаты поиска
+
             document.getElementById('searchResults').classList.add('hidden');
             document.getElementById('activeScript').classList.add('hidden');
         }
@@ -869,31 +1460,31 @@
                 document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('hidden'));
                 return;
             }
-            
+
             const lower = query.toLowerCase();
             const results = [];
-            
+
             for (const [key, script] of Object.entries(scripts)) {
-                const text = (script.title + ' ' + (script.tags?.join(' ') || '') + ' ' + (script.text || '') + ' ' + (script.template || '')).toLowerCase();
-                if (text.includes(lower)) {
+                const searchText = (script.title + ' ' + (script.tags?.join(' ') || '') + ' ' + (script.ru?.phrase || '') + ' ' + (script.template || '')).toLowerCase();
+                if (searchText.includes(lower)) {
                     results.push({ key, ...script });
                 }
             }
-            
+
             renderResults(results);
         }
 
         function renderResults(results) {
             const container = document.getElementById('searchResults');
             const tabs = document.querySelectorAll('.tab-content');
-            
+
             if (results.length === 0) {
                 container.innerHTML = '<div class="p-8 text-center text-gray-500">Ничего не найдено. Попробуй: "постоплата", "не нужно", "почта"</div>';
                 container.classList.remove('hidden');
                 tabs.forEach(t => t.classList.add('hidden'));
                 return;
             }
-            
+
             container.innerHTML = results.map(r => `
                 <div class="script-card cursor-pointer" onclick="openScript('${r.key}')">
                     <div class="script-header">
@@ -902,7 +1493,7 @@
                     </div>
                 </div>
             `).join('');
-            
+
             container.classList.remove('hidden');
             tabs.forEach(t => t.classList.add('hidden'));
         }
@@ -910,101 +1501,162 @@
         function openScript(key) {
             const script = scripts[key];
             if (!script) return;
-            
+
             const container = document.getElementById('activeScript');
-            
             let content = '';
-            
-            if (script.dialogue) {
-                // Диалоговый формат
+
+            if (script.type === 'trilingual') {
+                // Трёхъязычная карточка как на скриншоте
                 content = `
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h2 class="text-xl font-bold text-white mb-1">${script.title}</h2>
-                            <div class="flex gap-3 text-sm">
-                                <span class="text-orange-400"><i class="fas fa-bullseye mr-1"></i>${script.goal}</span>
-                                <span class="text-gray-500"><i class="fas fa-clock mr-1"></i>${script.time}</span>
-                            </div>
-                        </div>
-                        <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="space-y-2">
-                        ${script.dialogue.map(line => `
-                            <div class="dialogue-line">
-                                <span class="dialogue-speaker ${line.speaker}">${line.speaker === 'manager' ? 'Ты:' : 'Клиент:'}</span>
-                                <span class="dialogue-text">${line.text}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                    
-                    <div class="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-                        <span class="text-green-400 text-sm font-semibold"><i class="fas fa-lightbulb mr-1"></i>Ключевой момент:</span>
-                        <span class="text-gray-400 text-sm ml-1">Говори уверенно, низким голосом. Это партнерство, не продажа.</span>
-                    </div>
-                `;
-            } else if (script.type === 'antwort') {
-                // Ответ на возражение
-                content = `
-                    <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-xl font-bold text-white">${script.title}</h2>
-                        <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="dialogue-block">
-                        <p class="text-lg leading-relaxed">${script.text}</p>
-                    </div>
-                    
-                    <div class="mt-4 flex items-center gap-2">
-                        <span class="text-orange-400 text-sm font-semibold">Акцент:</span>
-                        <span class="text-gray-300 text-sm">${script.accent}</span>
-                    </div>
-                `;
-            } else if (script.type === 'email') {
-                // Email шаблон
-                content = `
-                    <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-xl font-bold text-white">${script.title}</h2>
-                        <div class="flex gap-2">
-                            <button onclick="copyToClipboard('${key}')" class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded text-sm hover:bg-orange-500/30">
-                                <i class="fas fa-copy mr-1"></i>Копировать
-                            </button>
-                            <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                    <div class="trilingual-card">
+                        <div class="trilingual-header">
+                            <h2 class="trilingual-title">${script.title}</h2>
+                            <button class="close-btn" onclick="closeScript()">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
-                    </div>
-                    
-                    <div class="bg-black/50 rounded-lg p-4 font-mono text-sm whitespace-pre-line text-gray-300 border border-white/10">
-                        ${script.template}
+
+                        <div class="lang-tabs">
+                            <button class="lang-tab active" onclick="switchLang('ru', this)">
+                                🇷🇺 RU
+                            </button>
+                            <button class="lang-tab" onclick="switchLang('lv', this)">
+                                🇱🇻 LV
+                            </button>
+                            <button class="lang-tab" onclick="switchLang('en', this)">
+                                🇬🇧 EN
+                            </button>
+                        </div>
+
+                        <div class="lang-content active" id="lang-ru">
+                            <div class="phrase-block">
+                                <div class="phrase-label">Ответ на возражение</div>
+                                <div class="phrase-text">${script.ru.phrase}</div>
+                            </div>
+                            <div class="accent-block">
+                                <div class="accent-label">Акцент</div>
+                                <div class="accent-text">${script.ru.accent}</div>
+                            </div>
+                            <button class="copy-btn mt-4" onclick="copyText('${script.ru.phrase.replace(/'/g, "\'")}')">
+                                <i class="fas fa-copy mr-2"></i>Копировать текст
+                            </button>
+                        </div>
+
+                        <div class="lang-content" id="lang-lv">
+                            <div class="phrase-block">
+                                <div class="phrase-label">Atbilde iebildumam</div>
+                                <div class="phrase-text">${script.lv.phrase}</div>
+                            </div>
+                            <div class="accent-block">
+                                <div class="accent-label">Akcentēt</div>
+                                <div class="accent-text">${script.lv.accent}</div>
+                            </div>
+                            <button class="copy-btn mt-4" onclick="copyText('${script.lv.phrase.replace(/'/g, "\'")}')">
+                                <i class="fas fa-copy mr-2"></i>Kopēt tekstu
+                            </button>
+                        </div>
+
+                        <div class="lang-content" id="lang-en">
+                            <div class="phrase-block">
+                                <div class="phrase-label">Response to objection</div>
+                                <div class="phrase-text">${script.en.phrase}</div>
+                            </div>
+                            <div class="accent-block">
+                                <div class="accent-label">Accent</div>
+                                <div class="accent-text">${script.en.accent}</div>
+                            </div>
+                            <button class="copy-btn mt-4" onclick="copyText('${script.en.phrase.replace(/'/g, "\'")}')">
+                                <i class="fas fa-copy mr-2"></i>Copy text
+                            </button>
+                        </div>
                     </div>
                 `;
-            } else {
-                // Простой текст
+            } else if (script.type === 'dialogue') {
                 content = `
-                    <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-xl font-bold text-white">${script.title}</h2>
-                        <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
+                    <div class="glass rounded-xl p-6 border border-orange-500/30">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h2 class="text-xl font-bold text-white mb-1">${script.title}</h2>
+                                <div class="flex gap-3 text-sm">
+                                    <span class="text-orange-400"><i class="fas fa-bullseye mr-1"></i>${script.goal}</span>
+                                    <span class="text-gray-500"><i class="fas fa-clock mr-1"></i>${script.time}</span>
+                                </div>
+                            </div>
+                            <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="space-y-2">
+                            ${script.dialogue.map(line => `
+                                <div class="dialogue-line">
+                                    <span class="dialogue-speaker ${line.speaker}">${line.speaker === 'manager' ? 'Ты:' : 'Клиент:'}</span>
+                                    <span class="dialogue-text">${line.text}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                            <span class="text-green-400 text-sm font-semibold"><i class="fas fa-lightbulb mr-1"></i>Ключевой момент:</span>
+                            <span class="text-gray-400 text-sm ml-1">Говори уверенно, низким голосом. Это партнерство, не продажа.</span>
+                        </div>
                     </div>
-                    <div class="text-gray-300 leading-relaxed">${script.text || script.rule || ''}</div>
+                `;
+            } else if (script.type === 'email') {
+                content = `
+                    <div class="glass rounded-xl p-6 border border-orange-500/30">
+                        <div class="flex justify-between items-start mb-4">
+                            <h2 class="text-xl font-bold text-white">${script.title}</h2>
+                            <div class="flex gap-2">
+                                <button onclick="copyToClipboard('${key}')" class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded text-sm hover:bg-orange-500/30">
+                                    <i class="fas fa-copy mr-1"></i>Копировать
+                                </button>
+                                <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/50 rounded-lg p-4 font-mono text-sm whitespace-pre-line text-gray-300 border border-white/10">
+                            ${script.template}
+                        </div>
+                    </div>
+                `;
+            } else if (script.type === 'psychology') {
+                content = `
+                    <div class="glass rounded-xl p-6 border border-green-500/30">
+                        <div class="flex justify-between items-start mb-4">
+                            <h2 class="text-xl font-bold text-white">${script.title}</h2>
+                            <button onclick="closeScript()" class="text-gray-400 hover:text-white p-2">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="phrase-block mb-4">
+                            <p class="text-lg">${script.content}</p>
+                        </div>
+                        <div class="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg">
+                            <span class="text-orange-400 text-sm font-semibold"><i class="fas fa-brain mr-1"></i>Правило:</span>
+                            <span class="text-gray-300 text-sm ml-1">${script.rule}</span>
+                        </div>
+                    </div>
                 `;
             }
-            
-            container.innerHTML = `<div class="glass rounded-xl p-6 border border-orange-500/30">${content}</div>`;
+
+            container.innerHTML = content;
             container.classList.remove('hidden');
-            
-            // Скрываем остальное
+
             document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
             document.getElementById('searchResults').classList.add('hidden');
-            
-            // Скролл к скрипту
+
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function switchLang(lang, btn) {
+            document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.lang-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
         }
 
         function closeScript() {
@@ -1012,41 +1664,46 @@
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('hidden'));
         }
 
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            const btn = event.target.closest('.copy-btn');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Скопировано!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = original;
+                btn.classList.remove('copied');
+            }, 1500);
+        }
+
         function copyToClipboard(key) {
             const script = scripts[key];
             if (!script || !script.template) return;
-            
-            navigator.clipboard.writeText(script.template.replace(/<[^>]+>/g, ''));
-            
-            // Визуальный фидбек
+
+            navigator.clipboard.writeText(script.template);
+
             const btn = event.target.closest('button');
             const original = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check mr-1"></i>Скопировано!';
-            btn.classList.add('bg-green-500/20', 'text-green-400');
             setTimeout(() => {
                 btn.innerHTML = original;
-                btn.classList.remove('bg-green-500/20', 'text-green-400');
             }, 1500);
         }
 
         function panicMode() {
-            // SOS - показываем самые критичные возражения
             switchTab('objections', document.querySelectorAll('.nav-tab')[1]);
             document.getElementById('searchInput').value = '';
             document.getElementById('activeScript').classList.add('hidden');
-            
-            // Визуальный фидбек
+
             const btn = event.target.closest('.fab-btn');
             btn.style.transform = 'scale(0.9)';
             setTimeout(() => btn.style.transform = '', 100);
         }
 
-        function toggleFavorites() {
-            // TODO: избранное
-            alert('Избранное: в разработке');
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Фокус на поиск при загрузке
         window.addEventListener('load', () => {
             document.getElementById('searchInput').focus();
         });
